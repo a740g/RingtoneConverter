@@ -11,9 +11,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("Ringtone Converter")>
 <Assembly: AssemblyDescription("mailto: v_2samg@hotmail.com")>
-<Assembly: AssemblyCompany("Microsoft Corporation")>
+<Assembly: AssemblyCompany("Samuel Gomes")>
 <Assembly: AssemblyProduct("Ringtone Converter")>
-<Assembly: AssemblyCopyright("Copyright © Samuel Gomes (Blade), 2003-2005")>
+<Assembly: AssemblyCopyright("Copyright © Samuel Gomes, 2003-2020")>
 <Assembly: AssemblyTrademark("Windows, Visual Basic are legal trademarks of Microsoft Corporation")>
 <Assembly: AssemblyCulture("")>
 
@@ -33,3 +33,4 @@ Imports System.Runtime.InteropServices
 
 
 <Assembly: ClassInterface(ClassInterfaceType.AutoDual)>
+<Assembly: ComVisible(False)>

@@ -33,7 +33,8 @@ Friend Class ClsRingTonePlayer
 	' We do not use MIDI or DirectSound just to keep the source short and simple and I don't have the
 	' time to implement it. You are more than welcome to do so. Send me a copy if you do and I'll
 	' update the source release.
-	Private Declare Function Beep Lib "kernel32" (ByVal dwFreq As Integer, ByVal dwDuration As Integer) As Integer
+	Private Declare Function Beep Lib "kernel32" (ByVal dwFreq As Integer,
+											   ByVal dwDuration As Integer) As Integer
 
 	' The main note frequencies. We calculate the sharps mathematically. :)
 	' I hope these are correct. Can someone provide me values with more precision?

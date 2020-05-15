@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion />
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DB2A229D-A6F3-4870-9F05-DF84A6248D89}</ProjectGuid>
     <MyType>WindowsForms</MyType>
@@ -16,6 +16,7 @@
     <AssemblyRevisionNumber>66</AssemblyRevisionNumber>
     <ApplicationIcon>RingtoneConverter.ico</ApplicationIcon>
     <RootNamespace>RingtoneConverter</RootNamespace>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>True</DebugSymbols>
@@ -53,9 +54,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.XML" />
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.VisualBasic.Compatibility.Data" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="System" />
@@ -96,6 +95,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="My Project\app.manifest" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
