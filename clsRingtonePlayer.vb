@@ -98,7 +98,7 @@ Friend Class ClsRingTonePlayer
 	Private Function CalcDuration(ByVal iDuration As Integer, ByVal bIsDot As Boolean) As Single
 
 		' Calculate the duration in milliseconds
-		Dim fDuration As Single = CSng(CSng(NOTE_DURATION_FULL) / (2.0! ^ CSng(NOTE_DURATION_MAX - iDuration)))
+		Dim fDuration As Single = CSng(NOTE_DURATION_FULL / (2.0! ^ (NOTE_DURATION_MAX - iDuration)))
 		' Correct duration if we have a dot note.
 		' A dot note is the average of this duration and the "next" duration
 		If bIsDot Then fDuration = fDuration * 3.0! / 2.0!
@@ -107,7 +107,7 @@ Friend Class ClsRingTonePlayer
 		' In one minute we have 60 secs or 60 x 1000 = 60000 ms
 		' One quater note = 300 ms
 		' Therefore the normal BPM = 60000 / 300 = 200
-		Return CSng(fDuration * CSng(NOTE_TEMPO_DEFAULT) / CSng(cTempo))
+		Return fDuration * NOTE_TEMPO_DEFAULT / cTempo
 	End Function
 
 	' Calculates the frequency

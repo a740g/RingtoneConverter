@@ -111,7 +111,7 @@ Partial Friend Class frmOptions
 	End Sub
 
 	Public Sub ApplyOptions()
-		frmMain.rtPlayer.Optimize = True
+		frmMain.RtPlayer.Optimize = True
 		frmMain.rtSE.SetOptions(cboStyle.SelectedIndex, sldRepeat.Value, sldAutoVibration.Value, sldAutoBacklight.Value, sldAutoLED.Value, sldVolume.Value)
 	End Sub
 

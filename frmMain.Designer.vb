@@ -51,30 +51,29 @@ Partial Class frmMain
 	Public WithEvents txtSource As System.Windows.Forms.TextBox
 	Public WithEvents cboRingtones As System.Windows.Forms.ComboBox
 	Public WithEvents fraRTTL As System.Windows.Forms.GroupBox
-	Public WithEvents sbStatus_Panels_Panel1 As System.Windows.Forms.ToolStripStatusLabel
-	Public WithEvents sbStatus As System.Windows.Forms.StatusStrip
-	Public WithEvents tbToolbar_Buttons_Button1 As System.Windows.Forms.ToolStripButton
-	Public WithEvents tbToolbar_Buttons_Button2 As System.Windows.Forms.ToolStripButton
-	Public WithEvents tbToolbar_Buttons_Button3 As System.Windows.Forms.ToolStripButton
-	Public WithEvents tbToolbar_Buttons_Button4 As System.Windows.Forms.ToolStripSeparator
-	Public WithEvents tbToolbar_Buttons_Button5 As System.Windows.Forms.ToolStripButton
-	Public WithEvents tbToolbar_Buttons_Button6 As System.Windows.Forms.ToolStripSeparator
-	Public WithEvents tbToolbar_Buttons_Button7 As System.Windows.Forms.ToolStripButton
-	Public WithEvents tbToolbar_Buttons_Button8 As System.Windows.Forms.ToolStripButton
-	Public WithEvents tbToolbar_Buttons_Button9 As System.Windows.Forms.ToolStripSeparator
-	Public WithEvents tbToolbar_Buttons_Button10 As System.Windows.Forms.ToolStripButton
-	Public WithEvents tbToolbar_Buttons_Button11 As System.Windows.Forms.ToolStripSeparator
-	Public WithEvents tbToolbar_Buttons_Button12 As System.Windows.Forms.ToolStripButton
-	Public WithEvents tbToolbar_Buttons_Button13 As System.Windows.Forms.ToolStripButton
-	Public WithEvents tbToolbar_Buttons_Button14 As System.Windows.Forms.ToolStripSeparator
-	Public WithEvents tbToolbar_Buttons_Button15 As System.Windows.Forms.ToolStripButton
-	Public WithEvents tbToolbar As System.Windows.Forms.ToolStrip
-	Public WithEvents imlToolbarIcons As System.Windows.Forms.ImageList
-	'NOTE: The following procedure is required by the Windows Form Designer
-	'It can be modified using the Windows Form Designer.
-	'Do not modify it using the code editor.
-	<System.Diagnostics.DebuggerStepThrough()> _
-	 Private Sub InitializeComponent()
+    Public WithEvents sbStatus As System.Windows.Forms.StatusStrip
+    Public WithEvents tbToolbar_New As System.Windows.Forms.ToolStripButton
+    Public WithEvents tbToolbar_Save As System.Windows.Forms.ToolStripButton
+    Public WithEvents tbToolbar_Delete As System.Windows.Forms.ToolStripButton
+    Public WithEvents tbToolbar_Buttons_Button4 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents tbToolbar_Properties As System.Windows.Forms.ToolStripButton
+    Public WithEvents tbToolbar_Buttons_Button6 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents tbToolbar_Convert As System.Windows.Forms.ToolStripButton
+    Public WithEvents tbToolbar_Export As System.Windows.Forms.ToolStripButton
+    Public WithEvents tbToolbar_Buttons_Button9 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents tbToolbar_Options As System.Windows.Forms.ToolStripButton
+    Public WithEvents tbToolbar_Buttons_Button11 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents tbToolbar_Play As System.Windows.Forms.ToolStripButton
+    Public WithEvents tbToolbar_Stop As System.Windows.Forms.ToolStripButton
+    Public WithEvents tbToolbar_Buttons_Button14 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents tbToolbar_Help As System.Windows.Forms.ToolStripButton
+    Public WithEvents tbToolbar As System.Windows.Forms.ToolStrip
+    Public WithEvents imlToolbarIcons As System.Windows.Forms.ImageList
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()>
+    Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.ToolTipMain = New System.Windows.Forms.ToolTip(Me.components)
@@ -103,24 +102,24 @@ Partial Class frmMain
         Me.fraSE = New System.Windows.Forms.GroupBox()
         Me.fraRTTL = New System.Windows.Forms.GroupBox()
         Me.sbStatus = New System.Windows.Forms.StatusStrip()
-        Me.sbStatus_Panels_Panel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tbToolbar = New System.Windows.Forms.ToolStrip()
         Me.imlToolbarIcons = New System.Windows.Forms.ImageList(Me.components)
-        Me.tbToolbar_Buttons_Button1 = New System.Windows.Forms.ToolStripButton()
-        Me.tbToolbar_Buttons_Button2 = New System.Windows.Forms.ToolStripButton()
-        Me.tbToolbar_Buttons_Button3 = New System.Windows.Forms.ToolStripButton()
+        Me.tbToolbar_New = New System.Windows.Forms.ToolStripButton()
+        Me.tbToolbar_Save = New System.Windows.Forms.ToolStripButton()
+        Me.tbToolbar_Delete = New System.Windows.Forms.ToolStripButton()
         Me.tbToolbar_Buttons_Button4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tbToolbar_Buttons_Button5 = New System.Windows.Forms.ToolStripButton()
+        Me.tbToolbar_Properties = New System.Windows.Forms.ToolStripButton()
         Me.tbToolbar_Buttons_Button6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tbToolbar_Buttons_Button7 = New System.Windows.Forms.ToolStripButton()
-        Me.tbToolbar_Buttons_Button8 = New System.Windows.Forms.ToolStripButton()
+        Me.tbToolbar_Convert = New System.Windows.Forms.ToolStripButton()
+        Me.tbToolbar_Export = New System.Windows.Forms.ToolStripButton()
         Me.tbToolbar_Buttons_Button9 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tbToolbar_Buttons_Button10 = New System.Windows.Forms.ToolStripButton()
+        Me.tbToolbar_Options = New System.Windows.Forms.ToolStripButton()
         Me.tbToolbar_Buttons_Button11 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tbToolbar_Buttons_Button12 = New System.Windows.Forms.ToolStripButton()
-        Me.tbToolbar_Buttons_Button13 = New System.Windows.Forms.ToolStripButton()
+        Me.tbToolbar_Play = New System.Windows.Forms.ToolStripButton()
+        Me.tbToolbar_Stop = New System.Windows.Forms.ToolStripButton()
         Me.tbToolbar_Buttons_Button14 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tbToolbar_Buttons_Button15 = New System.Windows.Forms.ToolStripButton()
+        Me.tbToolbar_Help = New System.Windows.Forms.ToolStripButton()
+        Me.TSLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MainMenu1.SuspendLayout()
         Me.fraSE.SuspendLayout()
         Me.fraRTTL.SuspendLayout()
@@ -334,34 +333,20 @@ Partial Class frmMain
         '
         'sbStatus
         '
-        Me.sbStatus.AllowDrop = True
         Me.sbStatus.BackColor = System.Drawing.SystemColors.Control
-        Me.sbStatus.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.sbStatus_Panels_Panel1})
-        Me.sbStatus.Location = New System.Drawing.Point(0, 383)
+        Me.sbStatus.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSLabel})
+        Me.sbStatus.Location = New System.Drawing.Point(0, 386)
         Me.sbStatus.Name = "sbStatus"
-        Me.sbStatus.ShowItemToolTips = True
-        Me.sbStatus.Size = New System.Drawing.Size(512, 25)
+        Me.sbStatus.Size = New System.Drawing.Size(512, 22)
+        Me.sbStatus.SizingGrip = False
         Me.sbStatus.TabIndex = 1
         Me.sbStatus.Text = "Ready!"
-        '
-        'sbStatus_Panels_Panel1
-        '
-        Me.sbStatus_Panels_Panel1.AutoSize = False
-        Me.sbStatus_Panels_Panel1.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.sbStatus_Panels_Panel1.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter
-        Me.sbStatus_Panels_Panel1.DoubleClickEnabled = True
-        Me.sbStatus_Panels_Panel1.Margin = New System.Windows.Forms.Padding(0)
-        Me.sbStatus_Panels_Panel1.Name = "sbStatus_Panels_Panel1"
-        Me.sbStatus_Panels_Panel1.Size = New System.Drawing.Size(96, 25)
-        Me.sbStatus_Panels_Panel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'tbToolbar
         '
         Me.tbToolbar.AllowDrop = True
         Me.tbToolbar.ImageList = Me.imlToolbarIcons
-        Me.tbToolbar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbToolbar_Buttons_Button1, Me.tbToolbar_Buttons_Button2, Me.tbToolbar_Buttons_Button3, Me.tbToolbar_Buttons_Button4, Me.tbToolbar_Buttons_Button5, Me.tbToolbar_Buttons_Button6, Me.tbToolbar_Buttons_Button7, Me.tbToolbar_Buttons_Button8, Me.tbToolbar_Buttons_Button9, Me.tbToolbar_Buttons_Button10, Me.tbToolbar_Buttons_Button11, Me.tbToolbar_Buttons_Button12, Me.tbToolbar_Buttons_Button13, Me.tbToolbar_Buttons_Button14, Me.tbToolbar_Buttons_Button15})
+        Me.tbToolbar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbToolbar_New, Me.tbToolbar_Save, Me.tbToolbar_Delete, Me.tbToolbar_Buttons_Button4, Me.tbToolbar_Properties, Me.tbToolbar_Buttons_Button6, Me.tbToolbar_Convert, Me.tbToolbar_Export, Me.tbToolbar_Buttons_Button9, Me.tbToolbar_Options, Me.tbToolbar_Buttons_Button11, Me.tbToolbar_Play, Me.tbToolbar_Stop, Me.tbToolbar_Buttons_Button14, Me.tbToolbar_Help})
         Me.tbToolbar.Location = New System.Drawing.Point(0, 24)
         Me.tbToolbar.Name = "tbToolbar"
         Me.tbToolbar.Size = New System.Drawing.Size(512, 25)
@@ -382,120 +367,136 @@ Partial Class frmMain
         Me.imlToolbarIcons.Images.SetKeyName(8, "Help")
         Me.imlToolbarIcons.Images.SetKeyName(9, "Convert")
         '
-        'tbToolbar_Buttons_Button1
+        'tbToolbar_New
         '
-        Me.tbToolbar_Buttons_Button1.ImageIndex = 0
-        Me.tbToolbar_Buttons_Button1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tbToolbar_Buttons_Button1.Name = "tbToolbar_Buttons_Button1"
-        Me.tbToolbar_Buttons_Button1.Size = New System.Drawing.Size(23, 22)
-        Me.tbToolbar_Buttons_Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tbToolbar_Buttons_Button1.ToolTipText = "Creates a new RTTL."
+        Me.tbToolbar_New.ImageIndex = 0
+        Me.tbToolbar_New.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tbToolbar_New.Name = "tbToolbar_New"
+        Me.tbToolbar_New.Size = New System.Drawing.Size(23, 22)
+        Me.tbToolbar_New.Tag = "New"
+        Me.tbToolbar_New.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tbToolbar_New.ToolTipText = "Creates a new RTTL."
         '
-        'tbToolbar_Buttons_Button2
+        'tbToolbar_Save
         '
-        Me.tbToolbar_Buttons_Button2.ImageIndex = 3
-        Me.tbToolbar_Buttons_Button2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tbToolbar_Buttons_Button2.Name = "tbToolbar_Buttons_Button2"
-        Me.tbToolbar_Buttons_Button2.Size = New System.Drawing.Size(23, 22)
-        Me.tbToolbar_Buttons_Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tbToolbar_Buttons_Button2.ToolTipText = "Saves the entire RTTL collection."
+        Me.tbToolbar_Save.ImageIndex = 3
+        Me.tbToolbar_Save.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tbToolbar_Save.Name = "tbToolbar_Save"
+        Me.tbToolbar_Save.Size = New System.Drawing.Size(23, 22)
+        Me.tbToolbar_Save.Tag = "Save"
+        Me.tbToolbar_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tbToolbar_Save.ToolTipText = "Saves the entire RTTL collection."
         '
-        'tbToolbar_Buttons_Button3
+        'tbToolbar_Delete
         '
-        Me.tbToolbar_Buttons_Button3.ImageIndex = 4
-        Me.tbToolbar_Buttons_Button3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tbToolbar_Buttons_Button3.Name = "tbToolbar_Buttons_Button3"
-        Me.tbToolbar_Buttons_Button3.Size = New System.Drawing.Size(23, 22)
-        Me.tbToolbar_Buttons_Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tbToolbar_Buttons_Button3.ToolTipText = "Removes ringtone from the RTTL collection."
+        Me.tbToolbar_Delete.ImageIndex = 4
+        Me.tbToolbar_Delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tbToolbar_Delete.Name = "tbToolbar_Delete"
+        Me.tbToolbar_Delete.Size = New System.Drawing.Size(23, 22)
+        Me.tbToolbar_Delete.Tag = "Delete"
+        Me.tbToolbar_Delete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tbToolbar_Delete.ToolTipText = "Removes ringtone from the RTTL collection."
         '
         'tbToolbar_Buttons_Button4
         '
         Me.tbToolbar_Buttons_Button4.Name = "tbToolbar_Buttons_Button4"
         Me.tbToolbar_Buttons_Button4.Size = New System.Drawing.Size(6, 25)
         '
-        'tbToolbar_Buttons_Button5
+        'tbToolbar_Properties
         '
-        Me.tbToolbar_Buttons_Button5.ImageIndex = 7
-        Me.tbToolbar_Buttons_Button5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tbToolbar_Buttons_Button5.Name = "tbToolbar_Buttons_Button5"
-        Me.tbToolbar_Buttons_Button5.Size = New System.Drawing.Size(23, 22)
-        Me.tbToolbar_Buttons_Button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tbToolbar_Buttons_Button5.ToolTipText = "Shows RTTL properties."
+        Me.tbToolbar_Properties.ImageIndex = 7
+        Me.tbToolbar_Properties.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tbToolbar_Properties.Name = "tbToolbar_Properties"
+        Me.tbToolbar_Properties.Size = New System.Drawing.Size(23, 22)
+        Me.tbToolbar_Properties.Tag = "Properties"
+        Me.tbToolbar_Properties.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tbToolbar_Properties.ToolTipText = "Shows RTTL properties."
         '
         'tbToolbar_Buttons_Button6
         '
         Me.tbToolbar_Buttons_Button6.Name = "tbToolbar_Buttons_Button6"
         Me.tbToolbar_Buttons_Button6.Size = New System.Drawing.Size(6, 25)
         '
-        'tbToolbar_Buttons_Button7
+        'tbToolbar_Convert
         '
-        Me.tbToolbar_Buttons_Button7.ImageIndex = 9
-        Me.tbToolbar_Buttons_Button7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tbToolbar_Buttons_Button7.Name = "tbToolbar_Buttons_Button7"
-        Me.tbToolbar_Buttons_Button7.Size = New System.Drawing.Size(23, 22)
-        Me.tbToolbar_Buttons_Button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tbToolbar_Buttons_Button7.ToolTipText = "Converts ringtone to the IMelody (IMY) format."
+        Me.tbToolbar_Convert.ImageIndex = 9
+        Me.tbToolbar_Convert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tbToolbar_Convert.Name = "tbToolbar_Convert"
+        Me.tbToolbar_Convert.Size = New System.Drawing.Size(23, 22)
+        Me.tbToolbar_Convert.Tag = "Convert"
+        Me.tbToolbar_Convert.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tbToolbar_Convert.ToolTipText = "Converts ringtone to the IMelody (IMY) format."
         '
-        'tbToolbar_Buttons_Button8
+        'tbToolbar_Export
         '
-        Me.tbToolbar_Buttons_Button8.ImageIndex = 2
-        Me.tbToolbar_Buttons_Button8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tbToolbar_Buttons_Button8.Name = "tbToolbar_Buttons_Button8"
-        Me.tbToolbar_Buttons_Button8.Size = New System.Drawing.Size(23, 22)
-        Me.tbToolbar_Buttons_Button8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tbToolbar_Buttons_Button8.ToolTipText = "Exports ringtone to an IMelody (IMY) file."
+        Me.tbToolbar_Export.ImageIndex = 2
+        Me.tbToolbar_Export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tbToolbar_Export.Name = "tbToolbar_Export"
+        Me.tbToolbar_Export.Size = New System.Drawing.Size(23, 22)
+        Me.tbToolbar_Export.Tag = "Export"
+        Me.tbToolbar_Export.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tbToolbar_Export.ToolTipText = "Exports ringtone to an IMelody (IMY) file."
         '
         'tbToolbar_Buttons_Button9
         '
         Me.tbToolbar_Buttons_Button9.Name = "tbToolbar_Buttons_Button9"
         Me.tbToolbar_Buttons_Button9.Size = New System.Drawing.Size(6, 25)
         '
-        'tbToolbar_Buttons_Button10
+        'tbToolbar_Options
         '
-        Me.tbToolbar_Buttons_Button10.ImageIndex = 1
-        Me.tbToolbar_Buttons_Button10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tbToolbar_Buttons_Button10.Name = "tbToolbar_Buttons_Button10"
-        Me.tbToolbar_Buttons_Button10.Size = New System.Drawing.Size(23, 22)
-        Me.tbToolbar_Buttons_Button10.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tbToolbar_Buttons_Button10.ToolTipText = "Configures application options."
+        Me.tbToolbar_Options.ImageIndex = 1
+        Me.tbToolbar_Options.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tbToolbar_Options.Name = "tbToolbar_Options"
+        Me.tbToolbar_Options.Size = New System.Drawing.Size(23, 22)
+        Me.tbToolbar_Options.Tag = "Options"
+        Me.tbToolbar_Options.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tbToolbar_Options.ToolTipText = "Configures application options."
         '
         'tbToolbar_Buttons_Button11
         '
         Me.tbToolbar_Buttons_Button11.Name = "tbToolbar_Buttons_Button11"
         Me.tbToolbar_Buttons_Button11.Size = New System.Drawing.Size(6, 25)
         '
-        'tbToolbar_Buttons_Button12
+        'tbToolbar_Play
         '
-        Me.tbToolbar_Buttons_Button12.ImageIndex = 5
-        Me.tbToolbar_Buttons_Button12.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tbToolbar_Buttons_Button12.Name = "tbToolbar_Buttons_Button12"
-        Me.tbToolbar_Buttons_Button12.Size = New System.Drawing.Size(23, 22)
-        Me.tbToolbar_Buttons_Button12.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tbToolbar_Buttons_Button12.ToolTipText = "Plays the selected ringtone."
+        Me.tbToolbar_Play.ImageIndex = 5
+        Me.tbToolbar_Play.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tbToolbar_Play.Name = "tbToolbar_Play"
+        Me.tbToolbar_Play.Size = New System.Drawing.Size(23, 22)
+        Me.tbToolbar_Play.Tag = "Play"
+        Me.tbToolbar_Play.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tbToolbar_Play.ToolTipText = "Plays the selected ringtone."
         '
-        'tbToolbar_Buttons_Button13
+        'tbToolbar_Stop
         '
-        Me.tbToolbar_Buttons_Button13.ImageIndex = 6
-        Me.tbToolbar_Buttons_Button13.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tbToolbar_Buttons_Button13.Name = "tbToolbar_Buttons_Button13"
-        Me.tbToolbar_Buttons_Button13.Size = New System.Drawing.Size(23, 22)
-        Me.tbToolbar_Buttons_Button13.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tbToolbar_Buttons_Button13.ToolTipText = "Stops the current ringtone playback."
+        Me.tbToolbar_Stop.ImageIndex = 6
+        Me.tbToolbar_Stop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tbToolbar_Stop.Name = "tbToolbar_Stop"
+        Me.tbToolbar_Stop.Size = New System.Drawing.Size(23, 22)
+        Me.tbToolbar_Stop.Tag = "Stop"
+        Me.tbToolbar_Stop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tbToolbar_Stop.ToolTipText = "Stops the current ringtone playback."
         '
         'tbToolbar_Buttons_Button14
         '
         Me.tbToolbar_Buttons_Button14.Name = "tbToolbar_Buttons_Button14"
         Me.tbToolbar_Buttons_Button14.Size = New System.Drawing.Size(6, 25)
         '
-        'tbToolbar_Buttons_Button15
+        'tbToolbar_Help
         '
-        Me.tbToolbar_Buttons_Button15.ImageIndex = 8
-        Me.tbToolbar_Buttons_Button15.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tbToolbar_Buttons_Button15.Name = "tbToolbar_Buttons_Button15"
-        Me.tbToolbar_Buttons_Button15.Size = New System.Drawing.Size(23, 22)
-        Me.tbToolbar_Buttons_Button15.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tbToolbar_Buttons_Button15.ToolTipText = "Shows application help information."
+        Me.tbToolbar_Help.ImageIndex = 8
+        Me.tbToolbar_Help.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tbToolbar_Help.Name = "tbToolbar_Help"
+        Me.tbToolbar_Help.Size = New System.Drawing.Size(23, 22)
+        Me.tbToolbar_Help.Tag = "Help"
+        Me.tbToolbar_Help.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tbToolbar_Help.ToolTipText = "Shows application help information."
+        '
+        'TSLabel
+        '
+        Me.TSLabel.Name = "TSLabel"
+        Me.TSLabel.Size = New System.Drawing.Size(42, 17)
+        Me.TSLabel.Text = "Ready!"
         '
         'frmMain
         '
@@ -537,5 +538,7 @@ Partial Class frmMain
 			AddHandler Me.Activated, AddressOf Me.FrmMain_Activated
 		End If
 	End Sub
+
+    Friend WithEvents TSLabel As ToolStripStatusLabel
 #End Region
 End Class

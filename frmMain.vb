@@ -58,7 +58,7 @@ Partial Friend Class frmMain
 	' Our global RTTTL object
 	Private rtRTTTL As New ClsRingtoneRTTTL
 	' Our global Ringtone player object
-	Public WithEvents rtPlayer As New ClsRingTonePlayer
+	Public WithEvents RtPlayer As New ClsRingTonePlayer
 	' Out global SE Ringtone converter object
 	Public rtSE As New ClsRingtoneSE
 
@@ -66,8 +66,8 @@ Partial Friend Class frmMain
 	' Converts ringtone data from RTTL to SE IMY
 	Public Sub mnuFileConvert_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuFileConvert.Click
 		rtRTTTL.Data = txtSource.Text
-		rtRTTTL.ConvertTo(rtPlayer)
-		rtSE.ConvertFrom(rtPlayer)
+		rtRTTTL.ConvertTo(RtPlayer)
+		rtSE.ConvertFrom(RtPlayer)
 		txtDestination.Text = rtSE.GetData()
 	End Sub
 
@@ -77,10 +77,9 @@ Partial Friend Class frmMain
 
 	Public Sub mnuHelpAbout_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuHelpAbout.Click
 		ShellAbout(Handle,
-				   Application.ProductName,
-				   Diagnostics.FileVersionInfo.GetVersionInfo(Reflection.Assembly.GetExecutingAssembly.Location).LegalCopyright &
-				   vbNewLine & "Version " & Application.ProductVersion,
-				   Icon.Handle)
+			 Application.ProductName,
+			 FileVersionInfo.GetVersionInfo(Reflection.Assembly.GetExecutingAssembly.Location).LegalCopyright & vbNewLine & "Version " & Application.ProductVersion,
+			 Icon.Handle)
 	End Sub
 
 	Public Sub mnuFileExit_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuFileExit.Click
@@ -94,7 +93,7 @@ Partial Friend Class frmMain
 	Private Sub cboRingtones_SelectedIndexChanged(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles cboRingtones.SelectedIndexChanged
 		txtSource.Text = CStr(colRingtones(CStr(cboRingtones.SelectedIndex)))
 		rtRTTTL.Data = txtSource.Text
-		rtRTTTL.ConvertTo(rtPlayer)
+		rtRTTTL.ConvertTo(RtPlayer)
 	End Sub
 
 	Public Sub mnuFileRemove_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuFileRemove.Click
@@ -131,10 +130,9 @@ Partial Friend Class frmMain
 
 	End Sub
 
-	Public Sub mnuFileNew_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuFileNew.Click
-
+	Public Sub MnuFileNew_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuFileNew.Click
 		' Get title from user
-		Dim sTitle As String = Interaction.InputBox("Enter the ringtone name:", vbNullString, "Untitled").Trim()
+		Dim sTitle As String = Trim(InputBox("Enter the ringtone name:", vbNullString, "Untitled"))
 
 		If sTitle = vbNullString Then Exit Sub
 
@@ -203,7 +201,7 @@ Partial Friend Class frmMain
 		End If
 
 		' Create the player objects
-		rtPlayer = New ClsRingTonePlayer()
+		RtPlayer = New ClsRingTonePlayer()
 
 		' Load all ringtones from the ringtone file into the combo
 		Try
@@ -221,7 +219,7 @@ Partial Friend Class frmMain
 			FileSystem.FileClose(iFileRTC)
 
 			cboRingtones.SelectedIndex = 0
-			txtDestination_TextChanged(txtDestination, New EventArgs())
+			TxtDestination_TextChanged(txtDestination, New EventArgs())
 
 			EnableDisableControls()
 
@@ -243,14 +241,14 @@ Partial Friend Class frmMain
 		mnuPlayStop.Enabled = False
 		mnuFileProperties.Enabled = cboRingtones.Items.Count > 0
 
-		tbToolbar.Items.Item("Remove").Enabled = mnuFileRemove.Enabled
-		tbToolbar.Items.Item("Save").Enabled = mnuFileSave.Enabled
-		tbToolbar.Items.Item("Convert").Enabled = mnuFileConvert.Enabled
-		tbToolbar.Items.Item("Play").Enabled = mnuPlayPlay.Enabled
-		tbToolbar.Items.Item("Stop").Enabled = mnuPlayStop.Enabled
-		tbToolbar.Items.Item("Properties").Enabled = mnuFileProperties.Enabled
+		tbToolbar_Delete.Enabled = mnuFileRemove.Enabled
+		tbToolbar_Save.Enabled = mnuFileSave.Enabled
+		tbToolbar_Convert.Enabled = mnuFileConvert.Enabled
+		tbToolbar_Play.Enabled = mnuPlayPlay.Enabled
+		tbToolbar_Stop.Enabled = mnuPlayStop.Enabled
+		tbToolbar_Properties.Enabled = mnuFileProperties.Enabled
 
-		sbStatus.Text = "Ready!"
+		TSLabel.Text = "Ready!"
 	End Sub
 
 	Private Sub Form_Closed(ByVal eventSender As Object, ByVal eventArgs As CancelEventArgs) Handles MyBase.Closing
@@ -264,15 +262,15 @@ Partial Friend Class frmMain
 
 	Public Sub mnuPlayPlay_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuPlayPlay.Click
 		mnuPlayPlay.Enabled = False
-		tbToolbar.Items.Item("Play").Enabled = mnuPlayPlay.Enabled
+		tbToolbar_Play.Enabled = mnuPlayPlay.Enabled
 		mnuPlayStop.Enabled = True
-		tbToolbar.Items.Item("Stop").Enabled = mnuPlayStop.Enabled
+		tbToolbar_Stop.Enabled = mnuPlayStop.Enabled
 
-		If rtPlayer.FirstNote() Then
+		If RtPlayer.FirstNote() Then
 			Do
-				rtPlayer.Play()
+				RtPlayer.Play()
 				Application.DoEvents()
-			Loop While rtPlayer.NextNote() And mnuPlayStop.Enabled
+			Loop While RtPlayer.NextNote() And mnuPlayStop.Enabled
 		End If
 
 		EnableDisableControls()
@@ -282,19 +280,20 @@ Partial Friend Class frmMain
 		mnuPlayStop.Enabled = False
 	End Sub
 
-	Private Sub rtPlayer_Playing(ByVal sNote As String, ByVal fFrequency As Single, ByVal fDuration As Single) Handles rtPlayer.Playing
+	Private Sub RtPlayer_Playing(ByVal sNote As String, ByVal fFrequency As Single, ByVal fDuration As Single) Handles RtPlayer.Playing
 		If fFrequency = 0 Then
-			sbStatus.Text = "Playing (" & sNote & ") silence for " & CStr(fDuration) & "ms..."
+			TSLabel.Text = "Playing (" & sNote & ") silence for " & CStr(fDuration) & "ms..."
 		Else
-			sbStatus.Text = "Playing (" & sNote & ") " & CStr(fFrequency) & "hz for " & CStr(fDuration) & "ms..."
+			TSLabel.Text = "Playing (" & sNote & ") " & CStr(fFrequency) & "hz for " & CStr(fDuration) & "ms..."
 		End If
 	End Sub
 
-	Private Sub tbToolbar_ButtonClick(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles tbToolbar_Buttons_Button1.Click, tbToolbar_Buttons_Button2.Click, tbToolbar_Buttons_Button3.Click, tbToolbar_Buttons_Button4.Click, tbToolbar_Buttons_Button5.Click, tbToolbar_Buttons_Button6.Click, tbToolbar_Buttons_Button7.Click, tbToolbar_Buttons_Button8.Click, tbToolbar_Buttons_Button9.Click, tbToolbar_Buttons_Button10.Click, tbToolbar_Buttons_Button11.Click, tbToolbar_Buttons_Button12.Click, tbToolbar_Buttons_Button13.Click, tbToolbar_Buttons_Button14.Click, tbToolbar_Buttons_Button15.Click
+	Private Sub TbToolbar_ButtonClick(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles tbToolbar_New.Click, tbToolbar_Save.Click, tbToolbar_Delete.Click, tbToolbar_Buttons_Button4.Click, tbToolbar_Properties.Click, tbToolbar_Buttons_Button6.Click, tbToolbar_Convert.Click, tbToolbar_Export.Click, tbToolbar_Buttons_Button9.Click, tbToolbar_Options.Click, tbToolbar_Buttons_Button11.Click, tbToolbar_Play.Click, tbToolbar_Stop.Click, tbToolbar_Buttons_Button14.Click, tbToolbar_Help.Click
 		Dim Button As ToolStripItem = CType(eventSender, ToolStripItem)
-		Select Case Button.Name
+
+		Select Case CStr(Button.Tag)
 			Case "New"
-				mnuFileNew_Click(mnuFileNew, New EventArgs())
+				MnuFileNew_Click(mnuFileNew, New EventArgs())
 			Case "Save"
 				mnuFileSave_Click(mnuFileSave, New EventArgs())
 			Case "Remove"
@@ -319,11 +318,11 @@ Partial Friend Class frmMain
 	End Sub
 
 	Private ReadOnly isInitializingComponent As Boolean
-	Private Sub txtDestination_TextChanged(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles txtDestination.TextChanged
+	Private Sub TxtDestination_TextChanged(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles txtDestination.TextChanged
 		If isInitializingComponent Then
 			Exit Sub
 		End If
 		mnuFileExport.Enabled = txtDestination.Text <> vbNullString
-		tbToolbar.Items.Item("Export").Enabled = mnuFileExport.Enabled
+		tbToolbar_Export.Enabled = mnuFileExport.Enabled
 	End Sub
 End Class

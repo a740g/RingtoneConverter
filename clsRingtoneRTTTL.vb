@@ -6,24 +6,13 @@ Imports Microsoft.VisualBasic
 
 Friend Class ClsRingtoneRTTTL
 
-	Private sRingtone As String = vbNullString
-
 	' Stores the ringtone in a internal variable
-	Public Property Data() As String
-		Get
-			Return sRingtone
-		End Get
-		Set(ByVal Value As String)
-			sRingtone = Value
-		End Set
-	End Property
+	Public Data As String = vbNullString
 
 	' Returns the ringtone name
-	Public ReadOnly Property Name() As String
-		Get
-			Return ParseString(sRingtone, ":", 1).Trim()
-		End Get
-	End Property
+	Public Function Name() As String
+		Return Trim(ParseString(Data, ":", 1))
+	End Function
 
 	' Converts the RTTTL ringtone to the internal ringtone format
 	Public Sub ConvertTo(ByVal RTP As ClsRingTonePlayer)
@@ -45,7 +34,7 @@ Friend Class ClsRingtoneRTTTL
 			cDefDuration = 4
 			cDefOctave = 5
 			cDefTempo = 200
-			sParams = ParseString(sRingtone, ":", 2)
+			sParams = ParseString(Data, ":", 2)
 
 			For i = 1 To 3
 				sTemp = ParseString(sParams, ", " & vbTab, i).ToLower()
@@ -68,12 +57,12 @@ Friend Class ClsRingtoneRTTTL
 			RTP.Name = Name
 			RTP.Tempo = cDefTempo
 
-			sData = ParseString(sRingtone, ":", 3)
+			sData = ParseString(Data, ":", 3)
 			i = 0
 
 			Do
 				i += 1
-				sTemp = ParseString(sData, ", " & vbTab, i).ToLower()
+				sTemp = LCase(ParseString(sData, ", " & vbTab, i))
 				If sTemp = vbNullString Then Exit Do
 				If Val(sTemp) < 1 Then sTemp = "0" & sTemp ' zero duration atleast; helps to parse
 

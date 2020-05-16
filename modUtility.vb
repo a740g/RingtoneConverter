@@ -37,7 +37,7 @@ Friend Module modUtility
 	' Converts a null-terminated string to a VB string (more of a convenience... trims it)
 	Public Function CStrToBStr(ByVal lpszString As String) As String
 		lpszString &= vbNullChar
-        Return lpszString.Substring(0, Math.Min(lpszString.IndexOf(vbNullChar), lpszString.Length))
+		Return Left(lpszString, InStr(lpszString, vbNullChar) - 1)
 	End Function
 
 	' Clamps vVal between vMin and vMax
@@ -47,11 +47,10 @@ Friend Module modUtility
 
 	' Similar to the C library strbrk() function
 	Public Function StrBrk(ByVal InString As String, ByVal Separator As String) As Integer
-
 		Dim ln As Integer = Len(InString)
 		Dim BegPos As Integer = 1
 
-		Do While (Separator.IndexOf(InString.Substring(BegPos - 1, Math.Min(1, InString.Length - (BegPos - 1)))) + 1) = 0
+		Do While InStr(Separator, Mid(InString, BegPos, 1)) = 0
 			If BegPos > ln Then
 				Return 0
 			Else
@@ -64,11 +63,10 @@ Friend Module modUtility
 
 	' Similar to the C library strspn() function
 	Public Function StrSpn(ByVal InString As String, ByVal Separator As String) As Integer
-
 		Dim ln As Integer = Len(InString)
 		Dim BegPos As Integer = 1
 
-		Do While Separator.IndexOf(InString.Substring(BegPos - 1, Math.Min(1, InString.Length - (BegPos - 1)))) >= 0
+		Do While InStr(Separator, Mid(InString, BegPos, 1)) <> 0
 			If BegPos > ln Then
 				Return 0
 			Else
@@ -82,7 +80,7 @@ Friend Module modUtility
 	' The main string parsing workhorse
 	Public Function GetToken(ByVal Search As String, ByVal Delim As String) As String
 		Dim result As String
-		Static SaveStr As String = vbNullString
+		Static SaveStr As String
 		Static BegPos As Integer
 
 		If Search <> vbNullString Then
@@ -145,13 +143,14 @@ Friend Module modUtility
 		If sErrSrc = vbNullString Then
 			sErrSrc = Err().Source
 			If sErrSrc = vbNullString Then
-				sErrSrc = My.Application.Info.AssemblyName
+				sErrSrc = My.Application.Info.AssemblyName & ".exe"
 			End If
 		End If
 
 		Return MessageBox.Show("The following error occured in " & sErrApp & " (" & sErrSrc & "):" & Environment.NewLine & Environment.NewLine & sMessage & "!", My.Application.Info.Title, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 	End Function
 
+	' Show standard Windows folder picker dialog box
 	Public Function BrowseForFolderDialog(ByVal frmForm As frmMain, Optional ByVal sTitle As String = "Browse For Folder:", Optional ByVal bShowFiles As Boolean = False, Optional ByVal bShowEditBox As Boolean = False) As String
 		Dim sResult As String = vbNullString
 		Dim sBuffer As String = vbNullString
@@ -179,8 +178,8 @@ Friend Module modUtility
 		Return sResult
 	End Function
 
+	' Removes invalid characters from filenames
 	Public Function MakeLegalFileName(ByVal sFName As String) As String
-
 		For i As Integer = 1 To Len(sFName)
 			If ("\/:*?<>|" & Chr(34).ToString()).IndexOf(sFName.Substring(i - 1, Math.Min(1, sFName.Length - (i - 1)))) >= 0 Then
 				Mid(sFName, i, 1) = "_"
@@ -189,4 +188,5 @@ Friend Module modUtility
 
 		Return sFName.Trim()
 	End Function
+
 End Module
