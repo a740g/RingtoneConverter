@@ -508,12 +508,13 @@ Partial Class frmMain
         Me.Controls.Add(Me.sbStatus)
         Me.Controls.Add(Me.tbToolbar)
         Me.Controls.Add(Me.MainMenu1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Location = New System.Drawing.Point(3, 49)
+        Me.MainMenuStrip = Me.MainMenu1
         Me.MaximizeBox = False
         Me.Name = "frmMain"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Ringtone Converter"
         Me.MainMenu1.ResumeLayout(False)
         Me.MainMenu1.PerformLayout()
