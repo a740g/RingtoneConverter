@@ -45,6 +45,11 @@ Friend Module modUtility
 		Return CInt(IIf(vVal > vMax, vMax, Math.Max(vMin, vVal)))
 	End Function
 
+	' Overload of the above
+	Public Function Clamp(ByVal vVal As UInteger, ByVal vMin As UInteger, ByVal vMax As UInteger) As UInteger
+		Return CUInt(IIf(vVal > vMax, vMax, Math.Max(vMin, vVal)))
+	End Function
+
 	' Similar to the C library strbrk() function
 	Public Function StrBrk(ByVal InString As String, ByVal Separator As String) As Integer
 		Dim ln As Integer = Len(InString)

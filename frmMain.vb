@@ -58,7 +58,7 @@ Partial Friend Class frmMain
 	' Our global RTTTL object
 	Private rtRTTTL As New ClsRingtoneRTTTL
 	' Our global Ringtone player object
-	Public WithEvents RtPlayer As New ClsRingTonePlayer
+	Public WithEvents RtPlayer As ClsRingTonePlayer
 	' Out global SE Ringtone converter object
 	Public rtSE As New ClsRingtoneSE
 
@@ -195,13 +195,8 @@ Partial Friend Class frmMain
 		' Initialize the randomizer
 		VBMath.Randomize()
 
-		' Warn the user about Windows 9x
-		If Interaction.Environ("OS") <> "Windows_NT" Then
-			MessageBox.Show("You seem to be using a Windows 9x OS. The 'Play' function might not work on this OS!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-		End If
-
 		' Create the player objects
-		RtPlayer = New ClsRingTonePlayer()
+		RtPlayer = New ClsRingTonePlayer(Me)
 
 		' Load all ringtones from the ringtone file into the combo
 		Try

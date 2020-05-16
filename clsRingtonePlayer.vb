@@ -26,15 +26,10 @@
 
 Imports Microsoft.VisualBasic
 Imports System.Collections.Specialized
+Imports SharpDX
+Imports SharpDX.DirectSound
 
 Friend Class ClsRingTonePlayer
-
-	' Kernel function we'll use to listen to the ringtone (works only on Windows NT/2000/XP/2003... :()
-	' We do not use MIDI or DirectSound just to keep the source short and simple and I don't have the
-	' time to implement it. You are more than welcome to do so. Send me a copy if you do and I'll
-	' update the source release.
-	Private Declare Function Beep Lib "kernel32" (ByVal dwFreq As Integer,
-											   ByVal dwDuration As Integer) As Integer
 
 	' The main note frequencies. We calculate the sharps mathematically. :)
 	' I hope these are correct. Can someone provide me values with more precision?
@@ -45,7 +40,6 @@ Friend Class ClsRingTonePlayer
 	Private Const NOTE_FRQ_G As Single = 392.0!
 	Private Const NOTE_FRQ_A As Single = 440.0!
 	Private Const NOTE_FRQ_B As Single = 493.88!
-	Private Const NOTE_FRQ_PAUSE As Integer = 32767 ' dummy!
 	' Note duration and octave constants
 	Private Const NOTE_OCTAVE_MIN As Integer = 1
 	Private Const NOTE_OCTAVE_MAX As Integer = 3
@@ -70,6 +64,18 @@ Friend Class ClsRingTonePlayer
 	Private Const NOTE_SHARP As String = "#"
 	Private Const NOTE_CHARS As String = NOTE_C & NOTE_D & NOTE_E & NOTE_F & NOTE_G & NOTE_A & NOTE_B & NOTE_PAUSE & NOTE_DOT & NOTE_SHARP
 
+	' These probably should Not be changed
+	Private Const MAX_FREQ As Integer = 32767
+	Private Const MIN_FREQ As Integer = 37
+	Private Const BITS_PER_SAMPLE As Integer = 16
+	Private Const NUM_CHANNELS As Integer = 1
+	Private Const SAMPLING_RATE As Integer = 44100
+	Private Const SCALE As Integer = (1 << (BITS_PER_SAMPLE - 1)) - 1
+
+	' Target frequency precision: less than 0.5% Error
+	'   37  Hz @ 44.1kHz sampling -> half-period of ~596 samples
+	' 32.8 kHz @ 44.1kHz sampling -> half-period of ~0.67 samples
+
 	' Global class variables
 	Private cTempo As Byte
 	' Hold the ringtone in internal format
@@ -79,20 +85,122 @@ Friend Class ClsRingTonePlayer
 	' Ringtone optimization flag
 	Private bOptimize As Boolean
 	Private sToneName As String = vbNullString
+	Private SndDevice As DirectSound = Nothing
+	Private SndWaveFormat As Multimedia.WaveFormat = Nothing
+	Private SndBufferDesc As SoundBufferDescription = Nothing
+	Private SndBuffer As PrimarySoundBuffer = Nothing
 
 	' Events
 	Public Event Playing(ByVal sNote As String, ByVal fFrequency As Single, ByVal fDuration As Single)
 
-	Public Sub New()
+	Public Sub New(ByVal frmForm As frmMain)
 		MyBase.New()
-		' Nothing much to de here... clear up
 		Clear()
+
+		SndDevice = New DirectSound()
+		' Set Cooperative Level to PRIORITY (priority level can call the SetFormat and Compact methods)
+		SndDevice.SetCooperativeLevel(frmForm.Handle, CooperativeLevel.Normal)
+
+		' Setup the wave format. This will not change so we do it once
+		SndWaveFormat = New Multimedia.WaveFormat(SAMPLING_RATE, BITS_PER_SAMPLE, NUM_CHANNELS)
+
+		' Create PrimarySoundBuffer
+		SndBufferDesc = New SoundBufferDescription With {
+			.Flags = BufferFlags.ControlPositionNotify Or BufferFlags.ControlFrequency Or BufferFlags.GlobalFocus,
+			.Format = SndWaveFormat
+		}
 	End Sub
 
 	Protected Overrides Sub Finalize()
-		' Again, not much to do here. But might be useful if we are doing MIDI or DirectSound
+		' Stop DirectSound stuff
+		SndBufferDesc = Nothing
+		SndWaveFormat = Nothing
+		SndDevice = Nothing
+
 		colRingtone = Nothing
 	End Sub
+
+	' Our DSound Beep
+	Private Function Beep(ByVal dwFreq As Integer, ByVal dwDuration As Integer) As Boolean
+		If SndDevice Is Nothing Then Return False
+
+		' Clamp the frequency to the acceptable range
+		dwFreq = Clamp(dwFreq, MIN_FREQ, MAX_FREQ)
+
+		' 1/dwFreq = period of wave, in seconds
+		' SAMPLING_RATE / dwFreq = samples per wave-period
+		Dim half_period As Integer = SAMPLING_RATE * NUM_CHANNELS \ (2 * dwFreq)
+		' The above line introduces roundoff error, which at higher
+		' frequencies Is significant (>30% at the 32kHz,
+		' easily above 1% in general, Not good). We will fix this below.
+
+		' If frequency too high, make sure it's not just a constant DC level
+		If (half_period < 1) Then half_period = 1
+		Dim BUFFER_SIZE As Integer = 2 * half_period * BITS_PER_SAMPLE \ 8
+
+		' Make buffer
+		SndBufferDesc.BufferBytes = BUFFER_SIZE
+
+		SndBuffer = New PrimarySoundBuffer(SndDevice, SndBufferDesc)
+		If SndBuffer Is Nothing Then Return False
+
+		' Frequency adjustment to correct for the roundoff error above.
+		Dim play_freq As Integer = SndBuffer.Frequency
+
+		' When we set the half_period above, we rounded down, so if
+		' we play the buffer as Is, it will sound higher frequency
+		' than it ought to be.
+		' To compensate, we should play the buffer at a slower speed.
+		' The slowdown factor Is precisely the rounded-down period
+		' divided by the true period:
+		' half_period / [ SAMPLING_RATE * NUM_CHANNELS / (2*dwFreq) ]
+		' = 2*dwFreq*half_period / (SAMPLING_RATE * NUM_CHANNELS)
+		'
+		' The adjusted frequency needs to be multiplied by this factor:
+		' play_freq *= 2*dwFreq*half_period / (SAMPLING_RATE * NUM_CHANNELS)
+		' To do this computation (in a way that works on 32-bit machines),
+		' we cannot multiply the numerator directly, since that may
+		' cause rounding problems (44100 * 2*44100*1 ~ 3.9 billion which
+		' Is uncomfortable close to the upper limit of 4.3 billion).
+		' Therefore, we use MulDiv to safely (And efficiently) avoid any
+		' problems.
+		'play_freq = MulDiv(play_freq, 2 * dwFreq * half_period, SAMPLING_RATE * NUM_CHANNELS)
+
+		play_freq = CInt(Math.BigMul(play_freq, 2 * dwFreq * half_period) \ SAMPLING_RATE * NUM_CHANNELS)
+
+		SndBuffer.Frequency = play_freq
+
+		Dim i, j, k As Integer
+		Dim bSnd(BUFFER_SIZE \ 2) As Short
+
+		' Write the square wave to buffer
+		k = 0
+		For i = 1 To half_period
+			For j = 1 To NUM_CHANNELS
+				bSnd(k) = -SCALE
+				k += 1
+			Next
+		Next
+
+		For i = 1 To half_period
+			For j = 1 To NUM_CHANNELS
+				bSnd(k) = SCALE
+				k += 1
+			Next
+		Next
+
+		SndBuffer.Write(bSnd, 0, LockFlags.EntireBuffer)
+
+		' Play the sound
+		SndBuffer.Play(0, PlayFlags.Looping)
+		Threading.Thread.Sleep(dwDuration)
+		SndBuffer.Stop()
+
+		' Delete buffer
+		SndBuffer = Nothing
+
+		Return True
+	End Function
 
 	' Calculates the duration in MS
 	Private Function CalcDuration(ByVal iDuration As Integer, ByVal bIsDot As Boolean) As Single
@@ -298,7 +406,7 @@ Friend Class ClsRingTonePlayer
 		If cNote = 0 Then
 			' Simulate silence
 			RaiseEvent Playing(GetFullNote(), 0, fDuration)
-			Beep(NOTE_FRQ_PAUSE, CInt(fDuration))
+			Beep(0, CInt(fDuration))
 		Else
 			' Calculate the frequency to play
 			fFrequency = CalcFrequency(cNote, IsSharp(), GetOctave())
