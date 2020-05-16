@@ -1,63 +1,67 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmOptions
+
 #Region "Upgrade Support "
-	Private Shared m_vb6FormDefInstance As frmOptions
-	Private Shared m_InitializingDefInstance As Boolean
-	Public Shared Property DefInstance() As frmOptions
-		Get
-			If m_vb6FormDefInstance Is Nothing OrElse m_vb6FormDefInstance.IsDisposed Then
-				m_InitializingDefInstance = True
-				m_vb6FormDefInstance = CreateInstance()
-				m_InitializingDefInstance = False
-			End If
-			Return m_vb6FormDefInstance
-		End Get
-		Set(ByVal Value As frmOptions)
-			m_vb6FormDefInstance = Value
-		End Set
-	End Property
+
+    Private Shared m_vb6FormDefInstance As frmOptions
+    Private Shared m_InitializingDefInstance As Boolean
+
+    Public Shared Property DefInstance() As frmOptions
+        Get
+            If m_vb6FormDefInstance Is Nothing OrElse m_vb6FormDefInstance.IsDisposed Then
+                m_InitializingDefInstance = True
+                m_vb6FormDefInstance = CreateInstance()
+                m_InitializingDefInstance = False
+            End If
+            Return m_vb6FormDefInstance
+        End Get
+        Set(ByVal Value As frmOptions)
+            m_vb6FormDefInstance = Value
+        End Set
+    End Property
+
 #End Region
+
 #Region "Windows Form Designer generated code "
 
-	Public Shared Function CreateInstance() As frmOptions
-		Dim theInstance As New frmOptions()
-		theInstance.Form_Load()
-		Return theInstance
-	End Function
+    Public Shared Function CreateInstance() As frmOptions
+        Dim theInstance As New frmOptions()
+        Return theInstance
+    End Function
 
-	Private visualControls() As String = New String() {"components", "ToolTipMain", "txtVolume", "txtRepeat", "txtAutoLED", "txtAutoBacklight", "txtAutoVibration", "cboStyle", "chkOptimize", "cmdCancel", "cmdOK", "sldAutoLED", "sldAutoBacklight", "sldAutoVibration", "sldRepeat", "sldVolume", "Label6", "Label2", "Label1", "Label3", "Label4", "Label5"} ', "listBoxComboBoxHelper1"}
+    Private visualControls() As String = New String() {"components", "ToolTipMain", "txtVolume", "txtRepeat", "txtAutoLED", "txtAutoBacklight", "txtAutoVibration", "cboStyle", "chkOptimize", "cmdCancel", "cmdOK", "sldAutoLED", "sldAutoBacklight", "sldAutoVibration", "sldRepeat", "sldVolume", "Label6", "Label2", "Label1", "Label3", "Label4", "Label5"}
 
-	'Required by the Windows Form Designer
-	Private components As System.ComponentModel.IContainer
-	Public ToolTipMain As System.Windows.Forms.ToolTip
-	Public WithEvents txtVolume As System.Windows.Forms.TextBox
-	Public WithEvents txtRepeat As System.Windows.Forms.TextBox
-	Public WithEvents txtAutoLED As System.Windows.Forms.TextBox
-	Public WithEvents txtAutoBacklight As System.Windows.Forms.TextBox
-	Public WithEvents txtAutoVibration As System.Windows.Forms.TextBox
-	Public WithEvents cboStyle As System.Windows.Forms.ComboBox
-	Public WithEvents chkOptimize As System.Windows.Forms.CheckBox
-	Public WithEvents cmdCancel As System.Windows.Forms.Button
-	Public WithEvents cmdOK As System.Windows.Forms.Button
-	Public WithEvents sldAutoLED As System.Windows.Forms.TrackBar
-	Public WithEvents sldAutoBacklight As System.Windows.Forms.TrackBar
-	Public WithEvents sldAutoVibration As System.Windows.Forms.TrackBar
-	Public WithEvents sldRepeat As System.Windows.Forms.TrackBar
-	Public WithEvents sldVolume As System.Windows.Forms.TrackBar
-	Public WithEvents Label6 As System.Windows.Forms.Label
-	Public WithEvents Label2 As System.Windows.Forms.Label
-	Public WithEvents Label1 As System.Windows.Forms.Label
-	Public WithEvents Label3 As System.Windows.Forms.Label
-	Public WithEvents Label4 As System.Windows.Forms.Label
-	Public WithEvents Label5 As System.Windows.Forms.Label
-	'Public listBoxComboBoxHelper1 As UpgradeHelpers.Gui.ListControlHelper
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+    Public ToolTipMain As System.Windows.Forms.ToolTip
+    Public WithEvents txtVolume As System.Windows.Forms.TextBox
+    Public WithEvents txtRepeat As System.Windows.Forms.TextBox
+    Public WithEvents txtAutoLED As System.Windows.Forms.TextBox
+    Public WithEvents txtAutoBacklight As System.Windows.Forms.TextBox
+    Public WithEvents txtAutoVibration As System.Windows.Forms.TextBox
+    Public WithEvents cboStyle As System.Windows.Forms.ComboBox
+    Public WithEvents chkOptimize As System.Windows.Forms.CheckBox
+    Public WithEvents cmdCancel As System.Windows.Forms.Button
+    Public WithEvents cmdOK As System.Windows.Forms.Button
+    Public WithEvents sldAutoLED As System.Windows.Forms.TrackBar
+    Public WithEvents sldAutoBacklight As System.Windows.Forms.TrackBar
+    Public WithEvents sldAutoVibration As System.Windows.Forms.TrackBar
+    Public WithEvents sldRepeat As System.Windows.Forms.TrackBar
+    Public WithEvents sldVolume As System.Windows.Forms.TrackBar
+    Public WithEvents Label6 As System.Windows.Forms.Label
+    Public WithEvents Label2 As System.Windows.Forms.Label
+    Public WithEvents Label1 As System.Windows.Forms.Label
+    Public WithEvents Label3 As System.Windows.Forms.Label
+    Public WithEvents Label4 As System.Windows.Forms.Label
+    Public WithEvents Label5 As System.Windows.Forms.Label
 
-	'NOTE: The following procedure is required by the Windows Form Designer
-	'It can be modified using the Windows Form Designer.
-	'Do not modify it using the code editor.
-	<System.Diagnostics.DebuggerStepThrough()> _
-	 Private Sub InitializeComponent()
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()>
+    Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
         Me.ToolTipMain = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtVolume = New System.Windows.Forms.TextBox()
         Me.txtRepeat = New System.Windows.Forms.TextBox()
@@ -98,7 +102,7 @@ Partial Class frmOptions
         Me.txtVolume.MaxLength = 0
         Me.txtVolume.Name = "txtVolume"
         Me.txtVolume.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.txtVolume.Size = New System.Drawing.Size(25, 21)
+        Me.txtVolume.Size = New System.Drawing.Size(33, 21)
         Me.txtVolume.TabIndex = 17
         Me.txtVolume.Text = "15"
         '
@@ -176,7 +180,7 @@ Partial Class frmOptions
         Me.cboStyle.Location = New System.Drawing.Point(115, 43)
         Me.cboStyle.Name = "cboStyle"
         Me.cboStyle.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cboStyle.Size = New System.Drawing.Size(77, 21)
+        Me.cboStyle.Size = New System.Drawing.Size(133, 21)
         Me.cboStyle.TabIndex = 2
         '
         'chkOptimize
@@ -188,7 +192,7 @@ Partial Class frmOptions
         Me.chkOptimize.Location = New System.Drawing.Point(12, 12)
         Me.chkOptimize.Name = "chkOptimize"
         Me.chkOptimize.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.chkOptimize.Size = New System.Drawing.Size(109, 17)
+        Me.chkOptimize.Size = New System.Drawing.Size(236, 25)
         Me.chkOptimize.TabIndex = 0
         Me.chkOptimize.Text = "Optimi&ze Ringtone:"
         Me.chkOptimize.UseVisualStyleBackColor = False
@@ -199,7 +203,7 @@ Partial Class frmOptions
         Me.cmdCancel.BackColor = System.Drawing.SystemColors.Control
         Me.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.cmdCancel.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.cmdCancel.Location = New System.Drawing.Point(264, 47)
+        Me.cmdCancel.Location = New System.Drawing.Point(254, 51)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.cmdCancel.Size = New System.Drawing.Size(81, 33)
@@ -213,7 +217,7 @@ Partial Class frmOptions
         Me.cmdOK.AllowDrop = True
         Me.cmdOK.BackColor = System.Drawing.SystemColors.Control
         Me.cmdOK.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.cmdOK.Location = New System.Drawing.Point(264, 8)
+        Me.cmdOK.Location = New System.Drawing.Point(254, 12)
         Me.cmdOK.Name = "cmdOK"
         Me.cmdOK.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.cmdOK.Size = New System.Drawing.Size(81, 33)
@@ -224,39 +228,39 @@ Partial Class frmOptions
         '
         'sldAutoLED
         '
-        Me.sldAutoLED.AllowDrop = True
         Me.sldAutoLED.Location = New System.Drawing.Point(104, 159)
         Me.sldAutoLED.Maximum = 255
         Me.sldAutoLED.Name = "sldAutoLED"
         Me.sldAutoLED.Size = New System.Drawing.Size(105, 45)
         Me.sldAutoLED.TabIndex = 13
+        Me.sldAutoLED.TickStyle = System.Windows.Forms.TickStyle.None
         '
         'sldAutoBacklight
         '
-        Me.sldAutoBacklight.AllowDrop = True
         Me.sldAutoBacklight.Location = New System.Drawing.Point(104, 130)
         Me.sldAutoBacklight.Maximum = 255
         Me.sldAutoBacklight.Name = "sldAutoBacklight"
         Me.sldAutoBacklight.Size = New System.Drawing.Size(105, 45)
         Me.sldAutoBacklight.TabIndex = 10
+        Me.sldAutoBacklight.TickStyle = System.Windows.Forms.TickStyle.None
         '
         'sldAutoVibration
         '
-        Me.sldAutoVibration.AllowDrop = True
         Me.sldAutoVibration.Location = New System.Drawing.Point(104, 100)
         Me.sldAutoVibration.Maximum = 255
         Me.sldAutoVibration.Name = "sldAutoVibration"
         Me.sldAutoVibration.Size = New System.Drawing.Size(105, 45)
         Me.sldAutoVibration.TabIndex = 7
+        Me.sldAutoVibration.TickStyle = System.Windows.Forms.TickStyle.None
         '
         'sldRepeat
         '
-        Me.sldRepeat.AllowDrop = True
         Me.sldRepeat.Location = New System.Drawing.Point(104, 71)
         Me.sldRepeat.Maximum = 255
         Me.sldRepeat.Name = "sldRepeat"
         Me.sldRepeat.Size = New System.Drawing.Size(105, 45)
         Me.sldRepeat.TabIndex = 4
+        Me.sldRepeat.TickStyle = System.Windows.Forms.TickStyle.None
         '
         'sldVolume
         '
@@ -353,10 +357,10 @@ Partial Class frmOptions
         Me.AllowDrop = True
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.SystemColors.Control
         Me.CancelButton = Me.cmdCancel
-        Me.ClientSize = New System.Drawing.Size(354, 223)
+        Me.ClientSize = New System.Drawing.Size(349, 226)
         Me.ControlBox = False
+        Me.Controls.Add(Me.sldVolume)
         Me.Controls.Add(Me.txtVolume)
         Me.Controls.Add(Me.txtRepeat)
         Me.Controls.Add(Me.txtAutoLED)
@@ -370,7 +374,6 @@ Partial Class frmOptions
         Me.Controls.Add(Me.sldAutoBacklight)
         Me.Controls.Add(Me.sldAutoVibration)
         Me.Controls.Add(Me.sldRepeat)
-        Me.Controls.Add(Me.sldVolume)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -378,11 +381,11 @@ Partial Class frmOptions
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label5)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Location = New System.Drawing.Point(3, 29)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmOptions"
-        Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Options"
@@ -395,12 +398,7 @@ Partial Class frmOptions
         Me.PerformLayout()
 
     End Sub
-    Sub ReLoadForm(ByVal addEvents As Boolean)
-		Form_Load()
-		If addEvents Then
-			AddHandler MyBase.Closed, AddressOf Me.Form_Closed
-			AddHandler Me.Activated, AddressOf Me.FrmOptions_Activated
-		End If
-	End Sub
+
 #End Region
+
 End Class

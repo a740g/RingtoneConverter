@@ -1,5 +1,5 @@
 ' iMelody format encoder
-' Copyright (c) Samuel Gomes (Blade), 2003-2004
+' Copyright (c) Samuel Gomes, 2003-2020
 ' mailto: v_2samg@hotmail.com
 '
 ' Sony Ericsson monophonic rintones are actually iMelody (.imy) files with the following format:
@@ -61,10 +61,6 @@
 Imports Microsoft.VisualBasic
 
 Friend Class ClsRingtoneSE
-
-	' Maximum number of options
-	Private Const MAX_OPTIONS As Byte = 6
-
 	' Option emumeration
 	Private Enum IMYOptions
 		Style = 1
@@ -75,8 +71,9 @@ Friend Class ClsRingtoneSE
 		Volume
 	End Enum
 
+	Private ReadOnly cOptions(5) As Byte
 	Private sRingtone As String = vbNullString, sName As String = vbNullString
-	Private ReadOnly cOptions(MAX_OPTIONS - 1) As Byte
+
 
 	Public Function GetData() As String
 		Return sRingtone

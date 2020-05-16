@@ -1,56 +1,62 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmMain
+
 #Region "Upgrade Support "
-	Private Shared m_vb6FormDefInstance As frmMain
-	Private Shared m_InitializingDefInstance As Boolean
-	Public Shared Property DefInstance() As frmMain
-		Get
-			If m_vb6FormDefInstance Is Nothing OrElse m_vb6FormDefInstance.IsDisposed Then
-				m_InitializingDefInstance = True
-				m_vb6FormDefInstance = CreateInstance()
-				m_InitializingDefInstance = False
-			End If
-			Return m_vb6FormDefInstance
-		End Get
-		Set(ByVal Value As frmMain)
-			m_vb6FormDefInstance = Value
-		End Set
-	End Property
+
+    Private Shared m_vb6FormDefInstance As frmMain
+    Private Shared m_InitializingDefInstance As Boolean
+
+    Public Shared Property DefInstance() As frmMain
+        Get
+            If m_vb6FormDefInstance Is Nothing OrElse m_vb6FormDefInstance.IsDisposed Then
+                m_InitializingDefInstance = True
+                m_vb6FormDefInstance = CreateInstance()
+                m_InitializingDefInstance = False
+            End If
+            Return m_vb6FormDefInstance
+        End Get
+        Set(ByVal Value As frmMain)
+            m_vb6FormDefInstance = Value
+        End Set
+    End Property
+
 #End Region
+
 #Region "Windows Form Designer generated code "
-	Public Shared Function CreateInstance() As frmMain
-		Dim theInstance As New frmMain()
-		theInstance.Form_Load()
-		Return theInstance
-	End Function
-	Private visualControls() As String = New String() {"components", "ToolTipMain", "mnuFileNew", "mnuFileSave", "mnuFileRemove", "mnuFileBar1", "mnuFileProperties", "mnuFileBar2", "mnuFileConvert", "mnuFileExport", "mnuFileBar3", "mnuFileOptions", "mnuFileBar4", "mnuFileExit", "mnuFile", "mnuPlayPlay", "mnuPlayStop", "mnuPlay", "mnuHelpAbout", "mnuHelp", "MainMenu1", "txtDestination", "fraSE", "txtSource", "cboRingtones", "fraRTTL", "sbStatus_Panels_Panel1", "sbStatus", "tbToolbar_Buttons_Button1", "tbToolbar_Buttons_Button2", "tbToolbar_Buttons_Button3", "tbToolbar_Buttons_Button4", "tbToolbar_Buttons_Button5", "tbToolbar_Buttons_Button6", "tbToolbar_Buttons_Button7", "tbToolbar_Buttons_Button8", "tbToolbar_Buttons_Button9", "tbToolbar_Buttons_Button10", "tbToolbar_Buttons_Button11", "tbToolbar_Buttons_Button12", "tbToolbar_Buttons_Button13", "tbToolbar_Buttons_Button14", "tbToolbar_Buttons_Button15", "tbToolbar", "imlToolbarIcons"}
-	'Required by the Windows Form Designer
-	Private components As System.ComponentModel.IContainer
-	Public ToolTipMain As System.Windows.Forms.ToolTip
-	Public WithEvents mnuFileNew As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuFileSave As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuFileRemove As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuFileBar1 As System.Windows.Forms.ToolStripSeparator
-	Public WithEvents mnuFileProperties As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuFileBar2 As System.Windows.Forms.ToolStripSeparator
-	Public WithEvents mnuFileConvert As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuFileExport As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuFileBar3 As System.Windows.Forms.ToolStripSeparator
-	Public WithEvents mnuFileOptions As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuFileBar4 As System.Windows.Forms.ToolStripSeparator
-	Public WithEvents mnuFileExit As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuFile As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuPlayPlay As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuPlayStop As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuPlay As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuHelpAbout As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents mnuHelp As System.Windows.Forms.ToolStripMenuItem
-	Public WithEvents MainMenu1 As System.Windows.Forms.MenuStrip
-	Public WithEvents txtDestination As System.Windows.Forms.TextBox
-	Public WithEvents fraSE As System.Windows.Forms.GroupBox
-	Public WithEvents txtSource As System.Windows.Forms.TextBox
-	Public WithEvents cboRingtones As System.Windows.Forms.ComboBox
-	Public WithEvents fraRTTL As System.Windows.Forms.GroupBox
+
+    Public Shared Function CreateInstance() As frmMain
+        Dim theInstance As New frmMain()
+        Return theInstance
+    End Function
+
+    Private visualControls() As String = New String() {"components", "ToolTipMain", "mnuFileNew", "mnuFileSave", "mnuFileRemove", "mnuFileBar1", "mnuFileProperties", "mnuFileBar2", "mnuFileConvert", "mnuFileExport", "mnuFileBar3", "mnuFileOptions", "mnuFileBar4", "mnuFileExit", "mnuFile", "mnuPlayPlay", "mnuPlayStop", "mnuPlay", "mnuHelpAbout", "mnuHelp", "MainMenu1", "txtDestination", "fraSE", "txtSource", "cboRingtones", "fraRTTL", "sbStatus_Panels_Panel1", "sbStatus", "tbToolbar_Buttons_Button1", "tbToolbar_Buttons_Button2", "tbToolbar_Buttons_Button3", "tbToolbar_Buttons_Button4", "tbToolbar_Buttons_Button5", "tbToolbar_Buttons_Button6", "tbToolbar_Buttons_Button7", "tbToolbar_Buttons_Button8", "tbToolbar_Buttons_Button9", "tbToolbar_Buttons_Button10", "tbToolbar_Buttons_Button11", "tbToolbar_Buttons_Button12", "tbToolbar_Buttons_Button13", "tbToolbar_Buttons_Button14", "tbToolbar_Buttons_Button15", "tbToolbar", "imlToolbarIcons"}
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+    Public ToolTipMain As System.Windows.Forms.ToolTip
+    Public WithEvents mnuFileNew As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuFileSave As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuFileRemove As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuFileBar1 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents mnuFileProperties As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuFileBar2 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents mnuFileConvert As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuFileExport As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuFileBar3 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents mnuFileOptions As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuFileBar4 As System.Windows.Forms.ToolStripSeparator
+    Public WithEvents mnuFileExit As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuFile As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuPlayPlay As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuPlayStop As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuPlay As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuHelpAbout As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents mnuHelp As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents MainMenu1 As System.Windows.Forms.MenuStrip
+    Public WithEvents txtDestination As System.Windows.Forms.TextBox
+    Public WithEvents fraSE As System.Windows.Forms.GroupBox
+    Public WithEvents txtSource As System.Windows.Forms.TextBox
+    Public WithEvents cboRingtones As System.Windows.Forms.ComboBox
+    Public WithEvents fraRTTL As System.Windows.Forms.GroupBox
     Public WithEvents sbStatus As System.Windows.Forms.StatusStrip
     Public WithEvents tbToolbar_New As System.Windows.Forms.ToolStripButton
     Public WithEvents tbToolbar_Save As System.Windows.Forms.ToolStripButton
@@ -69,6 +75,7 @@ Partial Class frmMain
     Public WithEvents tbToolbar_Help As System.Windows.Forms.ToolStripButton
     Public WithEvents tbToolbar As System.Windows.Forms.ToolStrip
     Public WithEvents imlToolbarIcons As System.Windows.Forms.ImageList
+
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
@@ -102,6 +109,7 @@ Partial Class frmMain
         Me.fraSE = New System.Windows.Forms.GroupBox()
         Me.fraRTTL = New System.Windows.Forms.GroupBox()
         Me.sbStatus = New System.Windows.Forms.StatusStrip()
+        Me.TSLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tbToolbar = New System.Windows.Forms.ToolStrip()
         Me.imlToolbarIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.tbToolbar_New = New System.Windows.Forms.ToolStripButton()
@@ -119,7 +127,6 @@ Partial Class frmMain
         Me.tbToolbar_Stop = New System.Windows.Forms.ToolStripButton()
         Me.tbToolbar_Buttons_Button14 = New System.Windows.Forms.ToolStripSeparator()
         Me.tbToolbar_Help = New System.Windows.Forms.ToolStripButton()
-        Me.TSLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MainMenu1.SuspendLayout()
         Me.fraSE.SuspendLayout()
         Me.fraRTTL.SuspendLayout()
@@ -342,9 +349,14 @@ Partial Class frmMain
         Me.sbStatus.TabIndex = 1
         Me.sbStatus.Text = "Ready!"
         '
+        'TSLabel
+        '
+        Me.TSLabel.Name = "TSLabel"
+        Me.TSLabel.Size = New System.Drawing.Size(42, 17)
+        Me.TSLabel.Text = "Ready!"
+        '
         'tbToolbar
         '
-        Me.tbToolbar.AllowDrop = True
         Me.tbToolbar.ImageList = Me.imlToolbarIcons
         Me.tbToolbar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbToolbar_New, Me.tbToolbar_Save, Me.tbToolbar_Delete, Me.tbToolbar_Buttons_Button4, Me.tbToolbar_Properties, Me.tbToolbar_Buttons_Button6, Me.tbToolbar_Convert, Me.tbToolbar_Export, Me.tbToolbar_Buttons_Button9, Me.tbToolbar_Options, Me.tbToolbar_Buttons_Button11, Me.tbToolbar_Play, Me.tbToolbar_Stop, Me.tbToolbar_Buttons_Button14, Me.tbToolbar_Help})
         Me.tbToolbar.Location = New System.Drawing.Point(0, 24)
@@ -370,7 +382,6 @@ Partial Class frmMain
         'tbToolbar_New
         '
         Me.tbToolbar_New.ImageIndex = 0
-        Me.tbToolbar_New.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tbToolbar_New.Name = "tbToolbar_New"
         Me.tbToolbar_New.Size = New System.Drawing.Size(23, 22)
         Me.tbToolbar_New.Tag = "New"
@@ -380,7 +391,6 @@ Partial Class frmMain
         'tbToolbar_Save
         '
         Me.tbToolbar_Save.ImageIndex = 3
-        Me.tbToolbar_Save.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tbToolbar_Save.Name = "tbToolbar_Save"
         Me.tbToolbar_Save.Size = New System.Drawing.Size(23, 22)
         Me.tbToolbar_Save.Tag = "Save"
@@ -390,7 +400,6 @@ Partial Class frmMain
         'tbToolbar_Delete
         '
         Me.tbToolbar_Delete.ImageIndex = 4
-        Me.tbToolbar_Delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tbToolbar_Delete.Name = "tbToolbar_Delete"
         Me.tbToolbar_Delete.Size = New System.Drawing.Size(23, 22)
         Me.tbToolbar_Delete.Tag = "Delete"
@@ -405,7 +414,6 @@ Partial Class frmMain
         'tbToolbar_Properties
         '
         Me.tbToolbar_Properties.ImageIndex = 7
-        Me.tbToolbar_Properties.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tbToolbar_Properties.Name = "tbToolbar_Properties"
         Me.tbToolbar_Properties.Size = New System.Drawing.Size(23, 22)
         Me.tbToolbar_Properties.Tag = "Properties"
@@ -420,7 +428,6 @@ Partial Class frmMain
         'tbToolbar_Convert
         '
         Me.tbToolbar_Convert.ImageIndex = 9
-        Me.tbToolbar_Convert.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tbToolbar_Convert.Name = "tbToolbar_Convert"
         Me.tbToolbar_Convert.Size = New System.Drawing.Size(23, 22)
         Me.tbToolbar_Convert.Tag = "Convert"
@@ -430,7 +437,6 @@ Partial Class frmMain
         'tbToolbar_Export
         '
         Me.tbToolbar_Export.ImageIndex = 2
-        Me.tbToolbar_Export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tbToolbar_Export.Name = "tbToolbar_Export"
         Me.tbToolbar_Export.Size = New System.Drawing.Size(23, 22)
         Me.tbToolbar_Export.Tag = "Export"
@@ -445,7 +451,6 @@ Partial Class frmMain
         'tbToolbar_Options
         '
         Me.tbToolbar_Options.ImageIndex = 1
-        Me.tbToolbar_Options.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tbToolbar_Options.Name = "tbToolbar_Options"
         Me.tbToolbar_Options.Size = New System.Drawing.Size(23, 22)
         Me.tbToolbar_Options.Tag = "Options"
@@ -460,7 +465,6 @@ Partial Class frmMain
         'tbToolbar_Play
         '
         Me.tbToolbar_Play.ImageIndex = 5
-        Me.tbToolbar_Play.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tbToolbar_Play.Name = "tbToolbar_Play"
         Me.tbToolbar_Play.Size = New System.Drawing.Size(23, 22)
         Me.tbToolbar_Play.Tag = "Play"
@@ -470,7 +474,6 @@ Partial Class frmMain
         'tbToolbar_Stop
         '
         Me.tbToolbar_Stop.ImageIndex = 6
-        Me.tbToolbar_Stop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tbToolbar_Stop.Name = "tbToolbar_Stop"
         Me.tbToolbar_Stop.Size = New System.Drawing.Size(23, 22)
         Me.tbToolbar_Stop.Tag = "Stop"
@@ -485,18 +488,11 @@ Partial Class frmMain
         'tbToolbar_Help
         '
         Me.tbToolbar_Help.ImageIndex = 8
-        Me.tbToolbar_Help.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tbToolbar_Help.Name = "tbToolbar_Help"
         Me.tbToolbar_Help.Size = New System.Drawing.Size(23, 22)
         Me.tbToolbar_Help.Tag = "Help"
         Me.tbToolbar_Help.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tbToolbar_Help.ToolTipText = "Shows application help information."
-        '
-        'TSLabel
-        '
-        Me.TSLabel.Name = "TSLabel"
-        Me.TSLabel.Size = New System.Drawing.Size(42, 17)
-        Me.TSLabel.Text = "Ready!"
         '
         'frmMain
         '
@@ -531,14 +527,9 @@ Partial Class frmMain
         Me.PerformLayout()
 
     End Sub
-    Sub ReLoadForm(ByVal addEvents As Boolean)
-		Form_Load()
-		If addEvents Then
-			AddHandler MyBase.Closing, AddressOf Me.Form_Closed
-			AddHandler Me.Activated, AddressOf Me.FrmMain_Activated
-		End If
-	End Sub
 
     Friend WithEvents TSLabel As ToolStripStatusLabel
+
 #End Region
+
 End Class

@@ -1,5 +1,5 @@
 ' Ringtone playback class
-' Copyright (c) Samuel Gomes (Blade), 2003-2004
+' Copyright (c) Samuel Gomes, 2003-2020
 ' mailto: v_2samg@hotmail.com
 
 ' This implements ringtone playback in the application.
@@ -50,7 +50,6 @@ Friend Class ClsRingTonePlayer
 	' Default tempo. Why 200? Look at the comments later :)
 	Private Const NOTE_TEMPO_DEFAULT As Integer = 200
 	Private Const NOTE_TEMPO_MIN As Integer = 1
-	Private Const NOTE_TEMPO_MAX As Integer = 255
 	' String representations of the vaid notes and symbols
 	Private Const NOTE_C As String = "C"
 	Private Const NOTE_D As String = "D"
@@ -82,13 +81,15 @@ Friend Class ClsRingTonePlayer
 	Private colRingtone As OrderedDictionary
 	' Which note we are currently pointing to?
 	Private lNoteIndex As Integer
-	' Ringtone optimization flag
-	Private bOptimize As Boolean
-	Private sToneName As String = vbNullString
+
 	Private SndDevice As DirectSound = Nothing
 	Private SndWaveFormat As Multimedia.WaveFormat = Nothing
 	Private SndBufferDesc As SoundBufferDescription = Nothing
 	Private SndBuffer As PrimarySoundBuffer = Nothing
+
+	' Ringtone optimization flag
+	Public Optimize As Boolean = False
+	Public Name As String = vbNullString
 
 	' Events
 	Public Event Playing(ByVal sNote As String, ByVal fFrequency As Single, ByVal fDuration As Single)
@@ -164,7 +165,6 @@ Friend Class ClsRingTonePlayer
 		' Is uncomfortable close to the upper limit of 4.3 billion).
 		' Therefore, we use MulDiv to safely (And efficiently) avoid any
 		' problems.
-		'play_freq = MulDiv(play_freq, 2 * dwFreq * half_period, SAMPLING_RATE * NUM_CHANNELS)
 
 		play_freq = CInt(Math.BigMul(play_freq, 2 * dwFreq * half_period) \ SAMPLING_RATE * NUM_CHANNELS)
 
@@ -265,33 +265,13 @@ Friend Class ClsRingTonePlayer
 		End Set
 	End Property
 
-	' Tone name get set methods
-	Public Property Name() As String
-		Get
-			Return sToneName
-		End Get
-		Set(ByVal Value As String)
-			sToneName = Value
-		End Set
-	End Property
-
-	' Sets the tone optimization flag
-	Public Property Optimize() As Boolean
-		Get
-			Return bOptimize
-		End Get
-		Set(ByVal Value As Boolean)
-			bOptimize = Value
-		End Set
-	End Property
-
 	' Clears the ringtone data
 	Public Sub Clear()
 		cTempo = NOTE_TEMPO_DEFAULT
 		colRingtone = Nothing
 		colRingtone = New OrderedDictionary()
 		lNoteIndex = 0
-		sToneName = vbNullString
+		Name = vbNullString
 	End Sub
 
 	' Adds a note to the ringtone
@@ -327,7 +307,7 @@ Friend Class ClsRingTonePlayer
 		If sNote <> NOTE_PAUSE And bIsSharp Then sFullNote &= NOTE_SHARP
 		If sNote <> NOTE_PAUSE Then sFullNote &= CStr(cOctave)
 
-		If bOptimize And colRingtone.Count > 0 Then
+		If Optimize And colRingtone.Count > 0 Then
 			' Club notes with duration between 1 to 5
 			' Get previous note
 			sPrevNote = CStr(colRingtone(CStr(colRingtone.Count - 1)))
@@ -406,7 +386,7 @@ Friend Class ClsRingTonePlayer
 		If cNote = 0 Then
 			' Simulate silence
 			RaiseEvent Playing(GetFullNote(), 0, fDuration)
-			Beep(0, CInt(fDuration))
+			Threading.Thread.Sleep(CInt(fDuration))
 		Else
 			' Calculate the frequency to play
 			fFrequency = CalcFrequency(cNote, IsSharp(), GetOctave())

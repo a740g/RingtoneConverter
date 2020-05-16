@@ -1,5 +1,5 @@
 ' Standard RTTTL format to the internal ringtone format converter
-' Copyright (c) Samuel Gomes (Blade), 2003-2004
+' Copyright (c) Samuel Gomes, 2003-2020
 ' mailto: v_2samg@hotmail.com
 
 Imports Microsoft.VisualBasic
