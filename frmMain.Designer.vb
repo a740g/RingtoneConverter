@@ -1,12 +1,12 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmMain
+Partial Class FrmMain
 
 #Region "Upgrade Support "
 
-    Private Shared m_vb6FormDefInstance As frmMain
+    Private Shared m_vb6FormDefInstance As FrmMain
     Private Shared m_InitializingDefInstance As Boolean
 
-    Public Shared Property DefInstance() As frmMain
+    Public Shared Property DefInstance() As FrmMain
         Get
             If m_vb6FormDefInstance Is Nothing OrElse m_vb6FormDefInstance.IsDisposed Then
                 m_InitializingDefInstance = True
@@ -15,7 +15,7 @@ Partial Class frmMain
             End If
             Return m_vb6FormDefInstance
         End Get
-        Set(ByVal Value As frmMain)
+        Set(ByVal Value As FrmMain)
             m_vb6FormDefInstance = Value
         End Set
     End Property
@@ -24,8 +24,8 @@ Partial Class frmMain
 
 #Region "Windows Form Designer generated code "
 
-    Public Shared Function CreateInstance() As frmMain
-        Dim theInstance As New frmMain()
+    Public Shared Function CreateInstance() As FrmMain
+        Dim theInstance As New FrmMain()
         Return theInstance
     End Function
 
@@ -82,7 +82,7 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMain))
         Me.ToolTipMain = New System.Windows.Forms.ToolTip(Me.components)
         Me.txtDestination = New System.Windows.Forms.TextBox()
         Me.txtSource = New System.Windows.Forms.TextBox()
@@ -175,6 +175,7 @@ Partial Class frmMain
         Me.cboRingtones.AllowDrop = True
         Me.cboRingtones.BackColor = System.Drawing.SystemColors.Window
         Me.cboRingtones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboRingtones.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.cboRingtones.ForeColor = System.Drawing.SystemColors.WindowText
         Me.cboRingtones.Location = New System.Drawing.Point(8, 16)
         Me.cboRingtones.Name = "cboRingtones"
@@ -189,6 +190,7 @@ Partial Class frmMain
         Me.MainMenu1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuPlay, Me.mnuHelp})
         Me.MainMenu1.Location = New System.Drawing.Point(0, 0)
         Me.MainMenu1.Name = "MainMenu1"
+        Me.MainMenu1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.MainMenu1.Size = New System.Drawing.Size(512, 24)
         Me.MainMenu1.TabIndex = 6
         '
@@ -314,6 +316,7 @@ Partial Class frmMain
         Me.fraSE.AllowDrop = True
         Me.fraSE.BackColor = System.Drawing.SystemColors.Control
         Me.fraSE.Controls.Add(Me.txtDestination)
+        Me.fraSE.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.fraSE.ForeColor = System.Drawing.SystemColors.ControlText
         Me.fraSE.Location = New System.Drawing.Point(8, 224)
         Me.fraSE.Name = "fraSE"
@@ -329,6 +332,7 @@ Partial Class frmMain
         Me.fraRTTL.BackColor = System.Drawing.SystemColors.Control
         Me.fraRTTL.Controls.Add(Me.txtSource)
         Me.fraRTTL.Controls.Add(Me.cboRingtones)
+        Me.fraRTTL.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.fraRTTL.ForeColor = System.Drawing.SystemColors.ControlText
         Me.fraRTTL.Location = New System.Drawing.Point(8, 56)
         Me.fraRTTL.Name = "fraRTTL"
@@ -361,6 +365,7 @@ Partial Class frmMain
         Me.tbToolbar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbToolbar_New, Me.tbToolbar_Save, Me.tbToolbar_Delete, Me.tbToolbar_Buttons_Button4, Me.tbToolbar_Properties, Me.tbToolbar_Buttons_Button6, Me.tbToolbar_Convert, Me.tbToolbar_Export, Me.tbToolbar_Buttons_Button9, Me.tbToolbar_Options, Me.tbToolbar_Buttons_Button11, Me.tbToolbar_Play, Me.tbToolbar_Stop, Me.tbToolbar_Buttons_Button14, Me.tbToolbar_Help})
         Me.tbToolbar.Location = New System.Drawing.Point(0, 24)
         Me.tbToolbar.Name = "tbToolbar"
+        Me.tbToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.tbToolbar.Size = New System.Drawing.Size(512, 25)
         Me.tbToolbar.TabIndex = 0
         '
@@ -494,7 +499,7 @@ Partial Class frmMain
         Me.tbToolbar_Help.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tbToolbar_Help.ToolTipText = "Shows application help information."
         '
-        'frmMain
+        'FrmMain
         '
         Me.AllowDrop = True
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -510,7 +515,7 @@ Partial Class frmMain
         Me.Location = New System.Drawing.Point(3, 49)
         Me.MainMenuStrip = Me.MainMenu1
         Me.MaximizeBox = False
-        Me.Name = "frmMain"
+        Me.Name = "FrmMain"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Text = "Ringtone Converter"
         Me.MainMenu1.ResumeLayout(False)

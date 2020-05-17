@@ -5,15 +5,14 @@
 ' Notes:
 ' The application only generates Nokia composer format (3315 compatible) and Panasonic composer
 ' format (GD68 compatible) ringtones from standard RTTTL format (as of now). Export to more formats
-' may be added later.
-' Ok, this is old. :( It only supports Sony Ericsson IMY format now. :)
-' BTW, I love Sony Ericsson! :)
+' may be added later. Ok, this is old. :( It only supports Sony Ericsson IMY format now. :)
+' Probably we can implement multiple formats someday. :)
 
 Imports Microsoft.VisualBasic
 Imports System.Collections.Specialized
 Imports System.ComponentModel
 
-Partial Friend Class frmMain
+Partial Friend Class FrmMain
 	Inherits Form
 	Public Sub New()
 		MyBase.New()
@@ -42,12 +41,15 @@ Partial Friend Class frmMain
 																		ByVal szApp As String,
 																		ByVal szOtherStuff As String,
 																		ByVal hIcon As IntPtr) As Integer
+
+	Private ReadOnly isInitializingComponent As Boolean
+
 	' The RTTTL ringtone collection file
 	Private Const FileRTC As String = "\ringtones.rtc"
 	' In-memory ringtone collection
-	Private colRingtones As New OrderedDictionary
+	Private ReadOnly colRingtones As New OrderedDictionary
 	' Our global RTTTL object
-	Private rtRTTTL As New ClsRingtoneRTTTL
+	Private ReadOnly rtRTTTL As New ClsRingtoneRTTTL
 	' Our global Ringtone player object
 	Public WithEvents RtPlayer As ClsRingTonePlayer
 	' Out global SE Ringtone converter object
@@ -174,9 +176,9 @@ Partial Friend Class frmMain
 				MessageBox.Show("Failed to save ringtones to the ringtone collection file (" & My.Application.Info.DirectoryPath & FileRTC & ")!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 			End If
 		End Try
-
 	End Sub
 
+	' This quickly checks what has to be enabled or disabled
 	Private Sub EnableDisableControls()
 		cboRingtones.Enabled = cboRingtones.Items.Count > 0
 		txtSource.Enabled = cboRingtones.Items.Count > 0
@@ -187,7 +189,8 @@ Partial Friend Class frmMain
 		mnuFileSave.Enabled = cboRingtones.Items.Count > 0
 		mnuPlayStop.Enabled = False
 		mnuFileProperties.Enabled = cboRingtones.Items.Count > 0
-		mnuFileExport.Enabled = cboRingtones.Items.Count > 0
+		mnuFileExport.Enabled = txtDestination.Text <> vbNullString
+
 
 		tbToolbar_Delete.Enabled = mnuFileRemove.Enabled
 		tbToolbar_Save.Enabled = mnuFileSave.Enabled
@@ -217,7 +220,7 @@ Partial Friend Class frmMain
 	End Sub
 
 	Public Sub MnuPlayStop_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuPlayStop.Click
-		mnuPlayStop.Enabled = False
+		If mnuPlayStop.Enabled Then mnuPlayStop.Enabled = False
 	End Sub
 
 	Private Sub RtPlayer_Playing(ByVal sNote As String, ByVal fFrequency As Single, ByVal fDuration As Single) Handles RtPlayer.Playing
@@ -236,31 +239,29 @@ Partial Friend Class frmMain
 
 		Select Case CStr(Button.Tag)
 			Case "New"
-				MnuFileNew_Click(mnuFileNew, New EventArgs())
+				MnuFileNew_Click(eventSender, eventArgs)
 			Case "Save"
-				MnuFileSave_Click(mnuFileSave, New EventArgs())
+				MnuFileSave_Click(eventSender, eventArgs)
 			Case "Remove"
-				MnuFileRemove_Click(mnuFileRemove, New EventArgs())
+				MnuFileRemove_Click(eventSender, eventArgs)
 			Case "Properties"
-				MnuFileProperties_Click(mnuFileProperties, New EventArgs())
+				MnuFileProperties_Click(eventSender, eventArgs)
 			Case "Convert"
-				MnuFileConvert_Click(mnuFileConvert, New EventArgs())
+				MnuFileConvert_Click(eventSender, eventArgs)
 			Case "Export"
-				MnuFileExport_Click(mnuFileExport, New EventArgs())
+				MnuFileExport_Click(eventSender, eventArgs)
 			Case "Options"
-				MnuFileOptions_Click(mnuFileOptions, New EventArgs())
+				MnuFileOptions_Click(eventSender, eventArgs)
 			Case "Play"
-				MnuPlayPlay_Click(mnuPlayPlay, New EventArgs())
+				MnuPlayPlay_Click(eventSender, eventArgs)
 			Case "Stop"
-				MnuPlayStop_Click(mnuPlayStop, New EventArgs())
+				MnuPlayStop_Click(eventSender, eventArgs)
 			Case "Help"
-				MnuHelpAbout_Click(mnuHelpAbout, New EventArgs())
+				MnuHelpAbout_Click(eventSender, eventArgs)
 			Case Else
 				MessageBox.Show("Toolbar function " & Button.Name & " not implemented!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 		End Select
 	End Sub
-
-	Private ReadOnly isInitializingComponent As Boolean
 
 	Private Sub TxtDestination_TextChanged(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles txtDestination.TextChanged
 		If isInitializingComponent Then
@@ -270,6 +271,7 @@ Partial Friend Class frmMain
 		tbToolbar_Export.Enabled = mnuFileExport.Enabled
 	End Sub
 
+	' Load the RTC file
 	Private Sub FrmMain_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
 		Dim iFileRTC As Integer
 		Dim sRingtone As String = vbNullString
@@ -289,7 +291,8 @@ Partial Friend Class frmMain
 
 			Do Until FileSystem.EOF(iFileRTC)
 				sRingtone = FileSystem.LineInput(iFileRTC)
-				cboRingtones.Items.Add(ParseString(sRingtone, ":", 1).Trim())
+				'cboRingtones.Items.Add(Trim(ParseString(sRingtone, ":", 1)))
+				cboRingtones.Items.Insert(lCtr, Trim(ParseString(sRingtone, ":", 1)))
 				colRingtones.Add(CStr(lCtr), sRingtone)
 				lCtr += 1
 			Loop
@@ -306,6 +309,10 @@ Partial Friend Class frmMain
 		End Try
 
 		EnableDisableControls()
+	End Sub
 
+	' Stop playback while closing the app
+	Private Sub FrmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+		MnuPlayStop_Click(sender, e)
 	End Sub
 End Class

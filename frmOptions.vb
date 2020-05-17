@@ -93,8 +93,8 @@ Partial Friend Class frmOptions
 	End Sub
 
 	Public Sub ApplyOptions()
-		frmMain.RtPlayer.Optimize = chkOptimize.Checked
-		frmMain.rtSE.SetOptions(cboStyle.SelectedIndex, sldRepeat.Value, sldAutoVibration.Value, sldAutoBacklight.Value, sldAutoLED.Value, sldVolume.Value)
+		FrmMain.RtPlayer.Optimize = chkOptimize.Checked
+		FrmMain.rtSE.SetOptions(cboStyle.SelectedIndex, sldRepeat.Value, sldAutoVibration.Value, sldAutoBacklight.Value, sldAutoLED.Value, sldVolume.Value)
 	End Sub
 
 	Private Sub TxtVolume_TextChanged(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles txtVolume.TextChanged

@@ -123,7 +123,7 @@ Friend Class ClsRingtoneSE
 
 		If RTP.FirstNote() Then
 			Do
-				sNote = CChar(RTP.GetNote().ToLower())
+				sNote = CChar(LCase(RTP.GetNote()))
 				If CStr(sNote) = "p" Then
 					sRingtone = sRingtone & "r" & CStr(6 - RTP.GetDuration())
 				Else

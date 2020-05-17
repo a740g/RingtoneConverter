@@ -1,12 +1,12 @@
 ' Miscellaneous utility functions
-' Copyright (c) Samuel Gomes (Blade), 2003-2004
+' Copyright (c) Samuel Gomes, 2003-2020
 ' mailto: v_2samg@hotmail.com
 
 Imports Microsoft.VisualBasic
 
-Friend Module modUtility
+Friend Module ModUtility
 
-	' Global type definitions
+	' SHBrowseForFolder type
 	Private Structure BrowseInfo
 		Public hWndOwner As Integer
 		Public pIDLRoot As Integer
@@ -18,11 +18,12 @@ Friend Module modUtility
 		Public iImage As Integer
 	End Structure
 
-	' Win32 Shell About box
+	' SHBrowseForFolder APIs
 	Private Declare Function SHBrowseForFolder Lib "shell32" Alias "SHBrowseForFolderA" (ByRef lpbi As BrowseInfo) As Integer
 	Private Declare Function SHGetPathFromIDList Lib "shell32" Alias "SHGetPathFromIDListA" (ByVal pIdList As Integer, ByVal pszPath As String) As Integer
 	Private Declare Sub CoTaskMemFree Lib "ole32" (ByVal pv As Integer)
 
+	' SHBrowseForFolder constants
 	Private Const MAX_PATH As Integer = 260
 	Private Const BIF_RETURNONLYFSDIRS As Integer = &H1S ' For finding a folder to start document searching
 	Private Const BIF_DONTGOBELOWDOMAIN As Integer = &H2S ' For starting the Find Computer
@@ -42,15 +43,33 @@ Friend Module modUtility
 
 	' Clamps vVal between vMin and vMax
 	Public Function Clamp(ByVal vVal As Integer, ByVal vMin As Integer, ByVal vMax As Integer) As Integer
-		Return CInt(IIf(vVal > vMax, vMax, Math.Max(vMin, vVal)))
+		' Handle special case :)
+		If vMin > vMax Then
+			Return Math.Max(Math.Min(vMin, vVal), vMax)
+		End If
+
+		Return Math.Max(Math.Min(vMax, vVal), vMin)
 	End Function
 
 	' Overload of the above
 	Public Function Clamp(ByVal vVal As UInteger, ByVal vMin As UInteger, ByVal vMax As UInteger) As UInteger
-		Return CUInt(IIf(vVal > vMax, vMax, Math.Max(vMin, vVal)))
+		' Handle special case :)
+		If vMin > vMax Then
+			Return Math.Max(Math.Min(vMin, vVal), vMax)
+		End If
+
+		Return Math.Max(Math.Min(vMax, vVal), vMin)
 	End Function
 
-	' Similar to the C library strbrk() function
+	' StrBrk:
+	'  Searches InString to find the first character from among those in
+	'  Separator. Returns the index of that character. This function can
+	'  be used to find the end of a token.
+	' Input:
+	'  InString = string to search
+	'  Separator = characters to search for
+	' Output:
+	'  StrBrk = index to first match in InString$ or 0 if none match
 	Public Function StrBrk(ByVal InString As String, ByVal Separator As String) As Integer
 		Dim ln As Integer = Len(InString)
 		Dim BegPos As Integer = 1
@@ -66,7 +85,15 @@ Friend Module modUtility
 		Return BegPos
 	End Function
 
-	' Similar to the C library strspn() function
+	' StrSpn:
+	'  Searches InString to find the first character that is not one of
+	'  those in Separator. Returns the index of that character. This
+	'  function can be used to find the start of a token.
+	' Input:
+	'  InString = string to search
+	'  Separator = characters to search for
+	' Output:
+	'  StrSpn = index to first nonmatch in InString$ or 0 if all match
 	Public Function StrSpn(ByVal InString As String, ByVal Separator As String) As Integer
 		Dim ln As Integer = Len(InString)
 		Dim BegPos As Integer = 1
@@ -82,51 +109,72 @@ Friend Module modUtility
 		Return BegPos
 	End Function
 
-	' The main string parsing workhorse
+	' GetToken:
+	'  Extracts tokens from a string. A token is a word that is surrounded
+	'  by separators, such as spaces or commas. Tokens are extracted and
+	'  analyzed when parsing sentences or commands. To use the GetToken
+	'  function, pass the string to be parsed on the first call, then pass
+	'  a null string on subsequent calls until the function returns a null
+	'  to indicate that the entire string has been parsed.
+	' Input:
+	'  Search = string to search
+	'  Delim  = String of separators
+	' Output:
+	'  GetToken = next token
 	Public Function GetToken(ByVal Search As String, ByVal Delim As String) As String
-		Dim result As String
-		Static SaveStr As String
-		Static BegPos As Integer
+		' These must be static to remeber values from call to call
+		Static SaveStr As String = vbNullString
+		Static BegPos As Integer = 0
 
+		' If first call, make a copy of the string
 		If Search <> vbNullString Then
 			BegPos = 1
 			SaveStr = Search
 		End If
 
-		Dim newPos As Integer = StrSpn(SaveStr.Substring(BegPos - 1, Math.Min(Len(SaveStr), SaveStr.Length - (BegPos - 1))), Delim)
-		If newPos > 0 Then
+		' Find the start of the next token
+		Dim newPos As Integer = StrSpn(Mid(SaveStr, BegPos, Len(SaveStr)), Delim)
+		If newPos <> 0 Then
+			' Set position to start of token
 			BegPos = newPos + BegPos - 1
 		Else
+			' If no new token, quit and return null
 			Return vbNullString
 		End If
 
-		newPos = StrBrk(SaveStr.Substring(BegPos - 1, Math.Min(Len(SaveStr), SaveStr.Length - (BegPos - 1))), Delim)
-		If newPos > 0 Then
+		' Find end of token
+		newPos = StrBrk(Mid(SaveStr, BegPos, Len(SaveStr)), Delim)
+		If newPos <> 0 Then
+			' Set position to end of token
 			newPos = BegPos + newPos - 1
 		Else
+			' If no end of token, return set to end a value
 			newPos = Len(SaveStr) + 1
 		End If
-		result = SaveStr.Substring(BegPos - 1, Math.Min(newPos - BegPos, SaveStr.Length - (BegPos - 1)))
+
+		' Cut token out of search string
+		Dim sResult As String = Mid(SaveStr, BegPos, newPos - BegPos)
+		' Set new starting position
 		BegPos = newPos
-		Return result
+
+		Return sResult
 	End Function
 
 	' Just a convenient wrapper over GetToken()
 	Public Function ParseString(ByVal UserString As String, ByVal UserToken As String, ByVal SubStringNumber As Integer) As String
-		Dim result As String
+		Dim i As Integer, sResult As String
 
-		If UserString = vbNullString Then
-			Return vbNullString
-		End If
+		If UserString = vbNullString Then Return vbNullString
 
-		result = GetToken(UserString, UserToken)
-		If SubStringNumber < 2 Then Return result
-		Dim i As Integer = 1
-		Do
-			result = GetToken(vbNullString, UserToken)
-			i += 1
-		Loop While i < SubStringNumber
-		Return result
+		sResult = GetToken(UserString, UserToken)
+
+		If SubStringNumber < 2 Then Return sResult
+
+		For i = 1 To SubStringNumber - 1
+			sResult = GetToken(vbNullString, UserToken)
+		Next
+
+		Return sResult
 	End Function
 
 	' Displays an error dialog
@@ -156,7 +204,7 @@ Friend Module modUtility
 	End Function
 
 	' Show standard Windows folder picker dialog box
-	Public Function BrowseForFolderDialog(ByVal frmForm As frmMain, Optional ByVal sTitle As String = "Browse For Folder:", Optional ByVal bShowFiles As Boolean = False, Optional ByVal bShowEditBox As Boolean = False) As String
+	Public Function BrowseForFolderDialog(ByVal frmForm As FrmMain, Optional ByVal sTitle As String = "Browse For Folder:", Optional ByVal bShowFiles As Boolean = False, Optional ByVal bShowEditBox As Boolean = False) As String
 		Dim sResult As String = vbNullString
 		Dim sBuffer As String = vbNullString
 		Dim tBrowseInfo As BrowseInfo
@@ -173,7 +221,7 @@ Friend Module modUtility
 
 		' Yuck!
 		If CBool(lpIDList) Then
-			sBuffer = New String(" "c, MAX_PATH)
+			sBuffer = Space(MAX_PATH)
 			If CBool(SHGetPathFromIDList(lpIDList, sBuffer)) Then
 				sResult = CStrToBStr(sBuffer)
 			End If
@@ -191,7 +239,7 @@ Friend Module modUtility
 			End If
 		Next
 
-		Return sFName.Trim()
+		Return Trim(sFName)
 	End Function
 
 End Module

@@ -175,6 +175,7 @@ Partial Class frmOptions
         Me.cboStyle.AllowDrop = True
         Me.cboStyle.BackColor = System.Drawing.SystemColors.Window
         Me.cboStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStyle.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.cboStyle.ForeColor = System.Drawing.SystemColors.WindowText
         Me.cboStyle.Items.AddRange(New Object() {"Natural", "Continious", "Staccato"})
         Me.cboStyle.Location = New System.Drawing.Point(115, 43)
@@ -188,6 +189,7 @@ Partial Class frmOptions
         Me.chkOptimize.AllowDrop = True
         Me.chkOptimize.BackColor = System.Drawing.SystemColors.Control
         Me.chkOptimize.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkOptimize.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.chkOptimize.ForeColor = System.Drawing.SystemColors.ControlText
         Me.chkOptimize.Location = New System.Drawing.Point(12, 12)
         Me.chkOptimize.Name = "chkOptimize"
@@ -202,6 +204,7 @@ Partial Class frmOptions
         Me.cmdCancel.AllowDrop = True
         Me.cmdCancel.BackColor = System.Drawing.SystemColors.Control
         Me.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.cmdCancel.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.cmdCancel.ForeColor = System.Drawing.SystemColors.ControlText
         Me.cmdCancel.Location = New System.Drawing.Point(254, 51)
         Me.cmdCancel.Name = "cmdCancel"
@@ -216,6 +219,7 @@ Partial Class frmOptions
         '
         Me.cmdOK.AllowDrop = True
         Me.cmdOK.BackColor = System.Drawing.SystemColors.Control
+        Me.cmdOK.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.cmdOK.ForeColor = System.Drawing.SystemColors.ControlText
         Me.cmdOK.Location = New System.Drawing.Point(254, 12)
         Me.cmdOK.Name = "cmdOK"
@@ -264,7 +268,6 @@ Partial Class frmOptions
         '
         'sldVolume
         '
-        Me.sldVolume.AllowDrop = True
         Me.sldVolume.Location = New System.Drawing.Point(104, 188)
         Me.sldVolume.Maximum = 15
         Me.sldVolume.Minimum = 1
@@ -278,6 +281,7 @@ Partial Class frmOptions
         Me.Label6.AllowDrop = True
         Me.Label6.AutoSize = True
         Me.Label6.BackColor = System.Drawing.SystemColors.Control
+        Me.Label6.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label6.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label6.Location = New System.Drawing.Point(64, 192)
         Me.Label6.Name = "Label6"
@@ -291,6 +295,7 @@ Partial Class frmOptions
         Me.Label2.AllowDrop = True
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.SystemColors.Control
+        Me.Label2.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label2.Location = New System.Drawing.Point(64, 75)
         Me.Label2.Name = "Label2"
@@ -304,6 +309,7 @@ Partial Class frmOptions
         Me.Label1.AllowDrop = True
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.SystemColors.Control
+        Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label1.Location = New System.Drawing.Point(30, 46)
         Me.Label1.Name = "Label1"
@@ -317,6 +323,7 @@ Partial Class frmOptions
         Me.Label3.AllowDrop = True
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.SystemColors.Control
+        Me.Label3.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label3.Location = New System.Drawing.Point(33, 104)
         Me.Label3.Name = "Label3"
@@ -330,6 +337,7 @@ Partial Class frmOptions
         Me.Label4.AllowDrop = True
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.SystemColors.Control
+        Me.Label4.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label4.Location = New System.Drawing.Point(30, 134)
         Me.Label4.Name = "Label4"
@@ -343,6 +351,7 @@ Partial Class frmOptions
         Me.Label5.AllowDrop = True
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.SystemColors.Control
+        Me.Label5.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label5.Location = New System.Drawing.Point(53, 163)
         Me.Label5.Name = "Label5"

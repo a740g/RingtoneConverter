@@ -94,7 +94,7 @@ Friend Class ClsRingTonePlayer
 	' Events
 	Public Event Playing(ByVal sNote As String, ByVal fFrequency As Single, ByVal fDuration As Single)
 
-	Public Sub New(ByVal frmForm As frmMain)
+	Public Sub New(ByVal frmForm As FrmMain)
 		MyBase.New()
 		Clear()
 
@@ -136,7 +136,7 @@ Friend Class ClsRingTonePlayer
 		' easily above 1% in general, Not good). We will fix this below.
 
 		' If frequency too high, make sure it's not just a constant DC level
-		If (half_period < 1) Then half_period = 1
+		If half_period < 1 Then half_period = 1
 		Dim BUFFER_SIZE As Integer = 2 * half_period * BITS_PER_SAMPLE \ 8
 
 		' Make buffer
@@ -189,6 +189,7 @@ Friend Class ClsRingTonePlayer
 			Next
 		Next
 
+		' Send the buffer for playback
 		SndBuffer.Write(bSnd, 0, LockFlags.EntireBuffer)
 
 		' Play the sound
@@ -279,7 +280,7 @@ Friend Class ClsRingTonePlayer
 		Dim sPrevNote As String
 
 		' Validate all parameters
-		sNote = sNote.Trim().ToUpper()
+		sNote = UCase(Trim(sNote))
 
 		Select Case sNote
 			Case NOTE_C, NOTE_D, NOTE_E, NOTE_F, NOTE_G, NOTE_A, NOTE_B
