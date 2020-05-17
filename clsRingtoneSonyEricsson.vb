@@ -79,12 +79,12 @@ Friend Class ClsRingtoneSE
 
 	Public Sub SetOptions(ParamArray ByVal vpaArgs() As Object)
 		Dim vVal As Byte
-		Dim cOption As Byte = 0
+		Dim cOption As Integer = 0
 
 		For Each vValIterator As Byte In vpaArgs
 			vVal = vValIterator
 			cOptions(cOption) = vVal
-			cOption += CByte(1)
+			cOption += 1
 		Next vValIterator
 	End Sub
 

@@ -61,13 +61,13 @@ Friend Class ClsRingtoneRTTTL
 	' Converts the RTTTL ringtone to the internal ringtone format
 	Public Sub ConvertTo(ByVal RTP As ClsRingTonePlayer)
 		Dim i As Integer
-		Dim sParams As String, sTemp As String = vbNullString
-		Dim cDefOctave, cDefDuration, cDefTempo As Byte
+		Dim sParams As String, sTemp As String
+		Dim cDefOctave, cDefDuration, cDefTempo As Integer
 		Dim sData As String
-		Dim cDuration As Byte
+		Dim cDuration As Integer
 		Dim bIsDot As Boolean
 		Dim sNote As Char
-		Dim cOctave As Byte
+		Dim cOctave As Integer
 		Dim bIsSharp As Boolean
 
 		' Start converting to internal format
@@ -81,15 +81,15 @@ Friend Class ClsRingtoneRTTTL
 			sTemp = LCase(ParseString(sParams, ", " & vbTab, i))
 
 			If InStr(sTemp, "o") > 0 Then
-				cDefOctave = CByte(Val(ParseString(sTemp, "= " & vbTab, 2)))
+				cDefOctave = CInt(Val(ParseString(sTemp, "= " & vbTab, 2)))
 			End If
 
 			If InStr(sTemp, "b") > 0 Then
-				cDefTempo = CByte(Val(ParseString(sTemp, "= " & vbTab, 2)))
+				cDefTempo = CInt(Val(ParseString(sTemp, "= " & vbTab, 2)))
 			End If
 
 			If InStr(sTemp, "d") > 0 Then
-				cDefDuration = CByte(Val(ParseString(sTemp, "= " & vbTab, 2)))
+				cDefDuration = CInt(Val(ParseString(sTemp, "= " & vbTab, 2)))
 			End If
 		Next
 
@@ -109,15 +109,15 @@ Friend Class ClsRingtoneRTTTL
 
 			sNote = CChar(IIf(InStr(sTemp, "c") > 0, "c", IIf(InStr(sTemp, "d") > 0, "d", IIf(InStr(sTemp, "e") > 0, "e", IIf(InStr(sTemp, "f") > 0, "f", IIf(InStr(sTemp, "g") > 0, "g", IIf(InStr(sTemp, "a") > 0, "a", IIf(InStr(sTemp, "b") > 0, "b", IIf(InStr(sTemp, "p") > 0, "p", "p")))))))))
 			bIsSharp = InStr(sTemp, "#") > 0
-			cOctave = CByte(Val(ParseString(sTemp, "cdefgabp.#", 2)))
-			cOctave = CByte(IIf(cOctave < 4, cDefOctave, cOctave)) - CByte(4)
-			cOctave = CByte(Clamp(cOctave, ClsRingTonePlayer.NOTE_OCTAVE_MIN, ClsRingTonePlayer.NOTE_OCTAVE_MAX))
-			cDuration = CByte(Val(ParseString(sTemp, "cdefgabp.#", 1)))
-			cDuration = CByte(IIf(cDuration < 1, cDefDuration, cDuration))
-			cDuration = CByte(IIf(cDuration > 16, 1, IIf(cDuration > 8, 2, IIf(cDuration > 4, 3, IIf(cDuration > 2, 4, IIf(cDuration > 1, 5, IIf(cDuration >= 0, 6, 6)))))))
+			cOctave = CInt(Val(ParseString(sTemp, "cdefgabp.#", 2)))
+			cOctave = CInt(IIf(cOctave < 4, cDefOctave, cOctave)) - 4
+			cOctave = Clamp(cOctave, ClsRingTonePlayer.NOTE_OCTAVE_MIN, ClsRingTonePlayer.NOTE_OCTAVE_MAX)
+			cDuration = CInt(Val(ParseString(sTemp, "cdefgabp.#", 1)))
+			cDuration = CInt(IIf(cDuration < 1, cDefDuration, cDuration))
+			cDuration = CInt(IIf(cDuration > 16, 1, IIf(cDuration > 8, 2, IIf(cDuration > 4, 3, IIf(cDuration > 2, 4, IIf(cDuration > 1, 5, IIf(cDuration >= 0, 6, 6)))))))
 			bIsDot = InStr(sTemp, ".") > 0 And CStr(sNote) <> "p"
 
-			RTP.AddNote(CStr(sNote), bIsSharp, cOctave, cDuration, bIsDot)
+			RTP.AddNote(sNote, bIsSharp, cOctave, cDuration, bIsDot)
 		Loop While sTemp <> vbNullString
 	End Sub
 End Class

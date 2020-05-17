@@ -41,8 +41,10 @@ Partial Friend Class FrmMain
 
 	' The RTTTL ringtone collection file
 	Private Const FileRTC As String = "\ringtones.rtc"
+	' Flag that can be checked when the app is loading the ringtone collection
+	Private IsLoading As Boolean = False
 	' In-memory ringtone collection
-	Private ReadOnly colRingtones As New OrderedDictionary
+	Private ReadOnly scRingtones As New StringCollection
 	' Our global RTTTL object
 	Private ReadOnly rtRTTTL As New ClsRingtoneRTTTL
 	' Our global Ringtone player object; we will "New" later
@@ -75,14 +77,14 @@ Partial Friend Class FrmMain
 
 	Public Sub MnuFileProperties_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuFileProperties.Click
 		MessageBox.Show(
-			"Ringtone: " & rtRTTTL.Name & Environment.NewLine & "Current List item (" & CStr(cboRingtones.SelectedIndex) & "): " & CStr(cboRingtones.SelectedItem) & Environment.NewLine & "Current Collections item: " & CStr(colRingtones(CStr(cboRingtones.SelectedItem))),
+			"Ringtone: " & rtRTTTL.Name & Environment.NewLine & "Current List item (" & CStr(cboRingtones.SelectedIndex) & "): " & CStr(cboRingtones.SelectedItem) & Environment.NewLine & "Current Collections item: " & scRingtones(cboRingtones.SelectedIndex),
 			My.Application.Info.Title,
 			MessageBoxButtons.OK,
 			MessageBoxIcon.Information)
 	End Sub
 
 	Private Sub CboRingtones_SelectedIndexChanged(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles cboRingtones.SelectedIndexChanged
-		txtSource.Text = CStr(colRingtones(CStr(cboRingtones.SelectedIndex)))
+		txtSource.Text = scRingtones(cboRingtones.SelectedIndex)
 		rtRTTTL.Data = txtSource.Text
 		rtRTTTL.ConvertTo(RtPlayer)
 	End Sub
@@ -90,16 +92,19 @@ Partial Friend Class FrmMain
 	Public Sub MnuFileRemove_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuFileRemove.Click
 		If MessageBox.Show("Are you sure that you want to remove this ringtone?", My.Application.Info.Title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
 
-			colRingtones.RemoveAt(cboRingtones.SelectedIndex)
-			cboRingtones.Items.RemoveAt(cboRingtones.SelectedIndex)
+			Dim iOldPos As Integer = cboRingtones.SelectedIndex
 
-			If cboRingtones.Items.Count > 0 Then
-				cboRingtones.SelectedIndex -= 1
+			scRingtones.RemoveAt(iOldPos)
+			cboRingtones.Items.RemoveAt(iOldPos)
+
+			If cboRingtones.Items.Count > 0 And iOldPos > 0 Then
+				cboRingtones.SelectedIndex = iOldPos - 1
+			Else
+				cboRingtones.SelectedIndex = 0
 			End If
 
 			EnableDisableControls()
 		End If
-
 	End Sub
 
 	Public Sub MnuFileExport_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuFileExport.Click
@@ -111,17 +116,13 @@ Partial Friend Class FrmMain
 		sExportFile = sExportFile & MakeLegalFileName(rtSE.Name) & ".imy"
 
 		Try
-
 			iFileExport = FileSystem.FreeFile()
 			FileSystem.FileOpen(iFileExport, sExportFile, OpenMode.Output, OpenAccess.Write)
 			FileSystem.PrintLine(iFileExport, txtDestination.Text)
 			FileSystem.FileClose(iFileExport)
-
 		Catch
-
 			MessageBox.Show("Failed to export ringtone to file (" & sExportFile & ")!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 		End Try
-
 	End Sub
 
 	Public Sub MnuFileNew_Click(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles mnuFileNew.Click
@@ -136,7 +137,7 @@ Partial Friend Class FrmMain
 		Dim lCtr As Integer = cboRingtones.Items.Count
 
 		cboRingtones.Items.Insert(lCtr, sTitle)
-		colRingtones.Insert(lCtr, CStr(lCtr), txtSource.Text)
+		scRingtones.Insert(lCtr, txtSource.Text)
 
 		cboRingtones.SelectedIndex = cboRingtones.Items.Count - 1
 
@@ -151,8 +152,7 @@ Partial Friend Class FrmMain
 		Try
 			If MessageBox.Show("Are you sure that you want to overwrite the entire ringtone collection?", My.Application.Info.Title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = System.Windows.Forms.DialogResult.Yes Then
 				' First update the current ringtone
-				colRingtones.RemoveAt(cboRingtones.SelectedIndex)
-				colRingtones.Insert(cboRingtones.SelectedIndex, CStr(cboRingtones.SelectedIndex), txtSource.Text)
+				scRingtones(cboRingtones.SelectedIndex) = txtSource.Text
 
 				errWriteRTC = True
 
@@ -160,15 +160,14 @@ Partial Friend Class FrmMain
 				FileSystem.FileOpen(iFileRTC, My.Application.Info.DirectoryPath & FileRTC, OpenMode.Output, OpenAccess.Write)
 
 				For lCtr As Integer = 0 To cboRingtones.Items.Count - 1
-					If LCase(Trim(sRT)) <> LCase(Trim(CStr(colRingtones(CStr(lCtr))))) Then
-						FileSystem.PrintLine(iFileRTC, Trim(CStr(colRingtones(CStr(lCtr)))))
+					If LCase(Trim(sRT)) <> LCase(Trim(scRingtones(lCtr))) Then
+						FileSystem.PrintLine(iFileRTC, Trim(scRingtones(lCtr)))
 					End If
-					sRT = CStr(colRingtones(CStr(lCtr)))
+					sRT = scRingtones(lCtr)
 				Next
 
 				FileSystem.FileClose(iFileRTC)
 			End If
-
 		Catch excep As Exception
 			If Not errWriteRTC Then
 				Throw excep
@@ -279,7 +278,6 @@ Partial Friend Class FrmMain
 	Private Sub FrmMain_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
 		Dim iFileRTC As Integer
 		Dim sRingtone As String = vbNullString
-		Dim lCtr As Integer = 0
 
 		' Initialize the randomizer
 		VBMath.Randomize()
@@ -288,19 +286,20 @@ Partial Friend Class FrmMain
 		RtPlayer = New ClsRingTonePlayer(Me)
 
 		' Load all ringtones from the ringtone file into the combo
+		IsLoading = True
+
 		Try
 
 			cboRingtones.Items.Clear()
-			colRingtones.Clear()
+			scRingtones.Clear()
 
 			iFileRTC = FileSystem.FreeFile()
 			FileSystem.FileOpen(iFileRTC, My.Application.Info.DirectoryPath & FileRTC, OpenMode.Input, OpenAccess.Read)
 
 			Do Until FileSystem.EOF(iFileRTC)
 				sRingtone = FileSystem.LineInput(iFileRTC)
-				cboRingtones.Items.Insert(lCtr, Trim(ParseString(sRingtone, ":", 1)))
-				colRingtones.Insert(lCtr, CStr(lCtr), sRingtone)
-				lCtr += 1
+				cboRingtones.Items.Add(Trim(ParseString(sRingtone, ":", 1)))
+				scRingtones.Add(sRingtone)
 			Loop
 
 			FileSystem.FileClose(iFileRTC)
@@ -314,6 +313,7 @@ Partial Friend Class FrmMain
 
 		End Try
 
+		IsLoading = False
 		EnableDisableControls()
 	End Sub
 
@@ -323,11 +323,13 @@ Partial Friend Class FrmMain
 	End Sub
 
 	Private Sub TxtSource_TextChanged(sender As Object, e As EventArgs) Handles txtSource.TextChanged
+		If IsLoading Then Return
+
 		' Add the ringtone to the internal list only if it has changed
-		Dim sData As String = CStr(colRingtones(cboRingtones.SelectedIndex))
+		Dim sData As String = scRingtones(cboRingtones.SelectedIndex)
 
 		If sData <> txtSource.Text Then
-			colRingtones(cboRingtones.SelectedIndex) = txtSource.Text
+			scRingtones(cboRingtones.SelectedIndex) = txtSource.Text
 			rtRTTTL.Data = txtSource.Text
 			rtRTTTL.ConvertTo(RtPlayer)
 		End If

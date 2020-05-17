@@ -49,16 +49,16 @@ Friend Class ClsRingTonePlayer
 	Private Const NOTE_TEMPO_DEFAULT As Integer = 200
 	Private Const NOTE_TEMPO_MIN As Integer = 1
 	' String representations of the vaid notes and symbols
-	Private Const NOTE_C As String = "C"
-	Private Const NOTE_D As String = "D"
-	Private Const NOTE_E As String = "E"
-	Private Const NOTE_F As String = "F"
-	Private Const NOTE_G As String = "G"
-	Private Const NOTE_A As String = "A"
-	Private Const NOTE_B As String = "B"
-	Private Const NOTE_PAUSE As String = "P"
-	Private Const NOTE_DOT As String = "."
-	Private Const NOTE_SHARP As String = "#"
+	Private Const NOTE_C As Char = "C"c
+	Private Const NOTE_D As Char = "D"c
+	Private Const NOTE_E As Char = "E"c
+	Private Const NOTE_F As Char = "F"c
+	Private Const NOTE_G As Char = "G"c
+	Private Const NOTE_A As Char = "A"c
+	Private Const NOTE_B As Char = "B"c
+	Private Const NOTE_PAUSE As Char = "P"c
+	Private Const NOTE_DOT As Char = "."c
+	Private Const NOTE_SHARP As Char = "#"c
 	Private Const NOTE_CHARS As String = NOTE_C & NOTE_D & NOTE_E & NOTE_F & NOTE_G & NOTE_A & NOTE_B & NOTE_PAUSE & NOTE_DOT & NOTE_SHARP
 
 	' These probably should Not be changed
@@ -74,9 +74,9 @@ Friend Class ClsRingTonePlayer
 	' 32.8 kHz @ 44.1kHz sampling -> half-period of ~0.67 samples
 
 	' Global class variables
-	Private cTempo As Byte
+	Private cTempo As Integer
 	' Hold the ringtone in internal format
-	Private colRingtone As OrderedDictionary
+	Private scRingtone As StringCollection
 	' Which note we are currently pointing to?
 	Private lNoteIndex As Integer
 
@@ -116,7 +116,7 @@ Friend Class ClsRingTonePlayer
 		SndWaveFormat = Nothing
 		SndDevice = Nothing
 
-		colRingtone = Nothing
+		scRingtone = Nothing
 	End Sub
 
 	' Our DSound Beep
@@ -218,7 +218,7 @@ Friend Class ClsRingTonePlayer
 	End Function
 
 	' Calculates the frequency
-	Private Function CalcFrequency(ByVal cNote As Byte, ByVal bIsSharp As Boolean, ByVal cOctave As Byte) As Single
+	Private Function CalcFrequency(ByVal cNote As Integer, ByVal bIsSharp As Boolean, ByVal cOctave As Integer) As Single
 		Dim fTemp As Single
 
 		' Get the frequency for the corresponding note (for below middle c octave)
@@ -241,7 +241,7 @@ Friend Class ClsRingTonePlayer
 		Dim result As String = vbNullString
 
 		Try
-			result = CStr(colRingtone(CStr(lNoteIndex)))
+			result = scRingtone(lNoteIndex)
 
 		Catch
 			' Nothing
@@ -251,11 +251,11 @@ Friend Class ClsRingTonePlayer
 	End Function
 
 	' Tempo get set methods
-	Public Property Tempo() As Byte
+	Public Property Tempo() As Integer
 		Get
 			Return cTempo
 		End Get
-		Set(ByVal Value As Byte)
+		Set(ByVal Value As Integer)
 			If Value < NOTE_TEMPO_MIN Then
 				Throw New Exception((vbObjectError + 1011).ToString() + ", , Tempo out of range")
 			End If
@@ -267,18 +267,16 @@ Friend Class ClsRingTonePlayer
 	' Clears the ringtone data
 	Public Sub Clear()
 		cTempo = NOTE_TEMPO_DEFAULT
-		colRingtone = Nothing
-		colRingtone = New OrderedDictionary()
+		scRingtone = Nothing
+		scRingtone = New StringCollection
 		lNoteIndex = 0
 		Name = vbNullString
 	End Sub
 
 	' Adds a note to the ringtone
-	Public Sub AddNote(ByVal sNote As String, ByVal bIsSharp As Boolean, ByVal cOctave As Byte, ByVal cDuration As Byte, ByVal bIsDot As Boolean)
-		Dim sPrevNote As String
-
+	Public Sub AddNote(ByVal sNote As Char, ByVal bIsSharp As Boolean, ByVal cOctave As Integer, ByVal cDuration As Integer, ByVal bIsDot As Boolean)
 		' Validate all parameters
-		sNote = UCase(Trim(sNote))
+		sNote = UCase(sNote)
 
 		Select Case sNote
 			Case NOTE_C, NOTE_D, NOTE_E, NOTE_F, NOTE_G, NOTE_A, NOTE_B
@@ -306,14 +304,14 @@ Friend Class ClsRingTonePlayer
 		If sNote <> NOTE_PAUSE And bIsSharp Then sFullNote &= NOTE_SHARP
 		If sNote <> NOTE_PAUSE Then sFullNote &= CStr(cOctave)
 
-		If Optimize And colRingtone.Count > 0 Then
+		If Optimize And scRingtone.Count > 0 Then
 			' Club notes with duration between 1 to 5
 			' Get previous note
-			sPrevNote = CStr(colRingtone(CStr(colRingtone.Count - 1)))
+			Dim sPrevNote As String = scRingtone(scRingtone.Count - 1)
 			' If both notes are similar then proceed
 			If sPrevNote = sFullNote And cDuration < NOTE_DURATION_MAX Then
 				' Remove the last note from the collection
-				colRingtone.Remove(CStr(colRingtone.Count - 1))
+				scRingtone.RemoveAt(scRingtone.Count - 1)
 				' Modify this note to reflect the duration change
 				sFullNote = CStr(cDuration + 1)
 				If sNote <> NOTE_PAUSE And bIsDot Then sFullNote &= NOTE_DOT
@@ -324,7 +322,7 @@ Friend Class ClsRingTonePlayer
 		End If
 
 		' Add note to collection
-		colRingtone.Add(CStr(colRingtone.Count), sFullNote)
+		scRingtone.Add(sFullNote)
 	End Sub
 
 	' Moves the note index to the next note
@@ -340,8 +338,8 @@ Friend Class ClsRingTonePlayer
 	End Function
 
 	' Retuns the duration of the current note
-	Public Function GetDuration() As Byte
-		Return CByte(ParseString(GetFullNote(), NOTE_CHARS, 1))
+	Public Function GetDuration() As Integer
+		Return CInt(Val(ParseString(GetFullNote(), NOTE_CHARS, 1)))
 	End Function
 
 	' Returns true if current note is a dot note
@@ -350,11 +348,11 @@ Friend Class ClsRingTonePlayer
 	End Function
 
 	' Returns the sole note from the current full note
-	Public Function GetNote() As String
+	Public Function GetNote() As Char
 
 		Dim sTemp As String = GetFullNote()
 
-		Return CStr(IIf(sTemp.IndexOf(NOTE_C) >= 0, NOTE_C, IIf(sTemp.IndexOf(NOTE_D) >= 0, NOTE_D, IIf(sTemp.IndexOf(NOTE_E) >= 0, NOTE_E, IIf(sTemp.IndexOf(NOTE_F) >= 0, NOTE_F, IIf(sTemp.IndexOf(NOTE_G) >= 0, NOTE_G, IIf(sTemp.IndexOf(NOTE_A) >= 0, NOTE_A, IIf(sTemp.IndexOf(NOTE_B) >= 0, NOTE_B, IIf(sTemp.IndexOf(NOTE_PAUSE) >= 0, NOTE_PAUSE, vbNullString)))))))))
+		Return CChar(IIf(sTemp.IndexOf(NOTE_C) >= 0, NOTE_C, IIf(sTemp.IndexOf(NOTE_D) >= 0, NOTE_D, IIf(sTemp.IndexOf(NOTE_E) >= 0, NOTE_E, IIf(sTemp.IndexOf(NOTE_F) >= 0, NOTE_F, IIf(sTemp.IndexOf(NOTE_G) >= 0, NOTE_G, IIf(sTemp.IndexOf(NOTE_A) >= 0, NOTE_A, IIf(sTemp.IndexOf(NOTE_B) >= 0, NOTE_B, IIf(sTemp.IndexOf(NOTE_PAUSE) >= 0, NOTE_PAUSE, vbNullChar)))))))))
 	End Function
 
 	' Returns true if note is sharp
@@ -363,8 +361,8 @@ Friend Class ClsRingTonePlayer
 	End Function
 
 	' Returns the current note octave
-	Public Function GetOctave() As Byte
-		Return CByte(ParseString(GetFullNote(), NOTE_CHARS, 2))
+	Public Function GetOctave() As Integer
+		Return CInt(Val(ParseString(GetFullNote(), NOTE_CHARS, 2)))
 	End Function
 
 	' Main note playback workhorse
@@ -372,12 +370,12 @@ Friend Class ClsRingTonePlayer
 		Dim sNote As Char
 		Dim fFrequency As Single
 
-		If colRingtone.Count = 0 Then Exit Sub
+		If scRingtone.Count = 0 Then Exit Sub
 
 		' Get the sole note
 		sNote = CChar(GetNote())
 		' Convert note to a numeric form
-		Dim cNote As Byte = CByte(IIf(CStr(sNote).IndexOf(NOTE_C) >= 0, 1, IIf(CStr(sNote).IndexOf(NOTE_D) >= 0, 2, IIf(CStr(sNote).IndexOf(NOTE_E) >= 0, 3, IIf(CStr(sNote).IndexOf(NOTE_F) >= 0, 4, IIf(CStr(sNote).IndexOf(NOTE_G) >= 0, 5, IIf(CStr(sNote).IndexOf(NOTE_A) >= 0, 6, IIf(CStr(sNote).IndexOf(NOTE_B) >= 0, 7, IIf(CStr(sNote).IndexOf(NOTE_PAUSE) >= 0, 0, 0)))))))))
+		Dim cNote As Integer = CInt(IIf(CStr(sNote).IndexOf(NOTE_C) >= 0, 1, IIf(CStr(sNote).IndexOf(NOTE_D) >= 0, 2, IIf(CStr(sNote).IndexOf(NOTE_E) >= 0, 3, IIf(CStr(sNote).IndexOf(NOTE_F) >= 0, 4, IIf(CStr(sNote).IndexOf(NOTE_G) >= 0, 5, IIf(CStr(sNote).IndexOf(NOTE_A) >= 0, 6, IIf(CStr(sNote).IndexOf(NOTE_B) >= 0, 7, IIf(CStr(sNote).IndexOf(NOTE_PAUSE) >= 0, 0, 0)))))))))
 
 		' Calculate the appropriate duration to play
 		Dim fDuration As Single = CalcDuration(GetDuration(), IsDot())

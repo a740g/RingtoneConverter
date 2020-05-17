@@ -203,76 +203,77 @@ Partial Class FrmMain
         '
         Me.mnuFileNew.Name = "mnuFileNew"
         Me.mnuFileNew.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.mnuFileNew.Size = New System.Drawing.Size(141, 22)
+        Me.mnuFileNew.Size = New System.Drawing.Size(180, 22)
         Me.mnuFileNew.Text = "&New"
         '
         'mnuFileSave
         '
         Me.mnuFileSave.Name = "mnuFileSave"
         Me.mnuFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mnuFileSave.Size = New System.Drawing.Size(141, 22)
+        Me.mnuFileSave.Size = New System.Drawing.Size(180, 22)
         Me.mnuFileSave.Text = "&Save"
         '
         'mnuFileRemove
         '
         Me.mnuFileRemove.Name = "mnuFileRemove"
-        Me.mnuFileRemove.Size = New System.Drawing.Size(141, 22)
+        Me.mnuFileRemove.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
+        Me.mnuFileRemove.Size = New System.Drawing.Size(180, 22)
         Me.mnuFileRemove.Text = "&Remove..."
         '
         'mnuFileBar1
         '
         Me.mnuFileBar1.AllowDrop = True
         Me.mnuFileBar1.Name = "mnuFileBar1"
-        Me.mnuFileBar1.Size = New System.Drawing.Size(138, 6)
+        Me.mnuFileBar1.Size = New System.Drawing.Size(177, 6)
         '
         'mnuFileProperties
         '
         Me.mnuFileProperties.Name = "mnuFileProperties"
-        Me.mnuFileProperties.Size = New System.Drawing.Size(141, 22)
+        Me.mnuFileProperties.Size = New System.Drawing.Size(180, 22)
         Me.mnuFileProperties.Text = "Propert&ies..."
         '
         'mnuFileBar2
         '
         Me.mnuFileBar2.AllowDrop = True
         Me.mnuFileBar2.Name = "mnuFileBar2"
-        Me.mnuFileBar2.Size = New System.Drawing.Size(138, 6)
+        Me.mnuFileBar2.Size = New System.Drawing.Size(177, 6)
         '
         'mnuFileConvert
         '
         Me.mnuFileConvert.Name = "mnuFileConvert"
         Me.mnuFileConvert.ShortcutKeys = System.Windows.Forms.Keys.F9
-        Me.mnuFileConvert.Size = New System.Drawing.Size(141, 22)
+        Me.mnuFileConvert.Size = New System.Drawing.Size(180, 22)
         Me.mnuFileConvert.Text = "&Convert"
         '
         'mnuFileExport
         '
         Me.mnuFileExport.Name = "mnuFileExport"
         Me.mnuFileExport.ShortcutKeys = System.Windows.Forms.Keys.F6
-        Me.mnuFileExport.Size = New System.Drawing.Size(141, 22)
+        Me.mnuFileExport.Size = New System.Drawing.Size(180, 22)
         Me.mnuFileExport.Text = "&Export..."
         '
         'mnuFileBar3
         '
         Me.mnuFileBar3.AllowDrop = True
         Me.mnuFileBar3.Name = "mnuFileBar3"
-        Me.mnuFileBar3.Size = New System.Drawing.Size(138, 6)
+        Me.mnuFileBar3.Size = New System.Drawing.Size(177, 6)
         '
         'mnuFileOptions
         '
         Me.mnuFileOptions.Name = "mnuFileOptions"
-        Me.mnuFileOptions.Size = New System.Drawing.Size(141, 22)
+        Me.mnuFileOptions.Size = New System.Drawing.Size(180, 22)
         Me.mnuFileOptions.Text = "&Options..."
         '
         'mnuFileBar4
         '
         Me.mnuFileBar4.AllowDrop = True
         Me.mnuFileBar4.Name = "mnuFileBar4"
-        Me.mnuFileBar4.Size = New System.Drawing.Size(138, 6)
+        Me.mnuFileBar4.Size = New System.Drawing.Size(177, 6)
         '
         'mnuFileExit
         '
         Me.mnuFileExit.Name = "mnuFileExit"
-        Me.mnuFileExit.Size = New System.Drawing.Size(141, 22)
+        Me.mnuFileExit.Size = New System.Drawing.Size(180, 22)
         Me.mnuFileExit.Text = "E&xit"
         '
         'mnuPlay
@@ -286,13 +287,14 @@ Partial Class FrmMain
         '
         Me.mnuPlayPlay.Name = "mnuPlayPlay"
         Me.mnuPlayPlay.ShortcutKeys = System.Windows.Forms.Keys.F5
-        Me.mnuPlayPlay.Size = New System.Drawing.Size(115, 22)
+        Me.mnuPlayPlay.Size = New System.Drawing.Size(180, 22)
         Me.mnuPlayPlay.Text = "&Play"
         '
         'mnuPlayStop
         '
         Me.mnuPlayStop.Name = "mnuPlayStop"
-        Me.mnuPlayStop.Size = New System.Drawing.Size(115, 22)
+        Me.mnuPlayStop.ShortcutKeys = System.Windows.Forms.Keys.F4
+        Me.mnuPlayStop.Size = New System.Drawing.Size(180, 22)
         Me.mnuPlayStop.Text = "&Stop"
         '
         'mnuHelp
