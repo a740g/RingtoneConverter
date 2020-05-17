@@ -55,8 +55,6 @@
 '   S0 = natural; very short rests
 '   S1 = continious; no rests
 '   S2 = staccato; notes shortened and rests inserted
-'
-' BTW I am a proud owner of a Sony Ericsson T610 mobile :)
 
 Imports Microsoft.VisualBasic
 
@@ -109,7 +107,7 @@ Friend Class ClsRingtoneSE
 		sRingtone = sRingtone & "VERSION:1.2" & Environment.NewLine
 		sRingtone = sRingtone & "FORMAT:CLASS1.0" & Environment.NewLine
 		sRingtone = sRingtone & "NAME:" & RTP.Name & Environment.NewLine
-		sRingtone = sRingtone & "COMPOSER:Samuel Gomes (Blade) (c) " & CStr(Date.Now.Year) & " for Sony Ericsson Mobile" & Environment.NewLine
+		sRingtone = sRingtone & "COMPOSER:Samuel Gomes (c) " & CStr(Date.Now.Year) & " for Sony Ericsson Mobile" & Environment.NewLine
 		sRingtone = sRingtone & "BEAT:" & CStr(RTP.Tempo) & Environment.NewLine
 		sRingtone = sRingtone & "STYLE:S" & CStr(Clamp(cOptions(IMYOptions.Style - 1), 0, 2)) & Environment.NewLine
 		sRingtone = sRingtone & "VOLUME:V" & CStr(Clamp(cOptions(IMYOptions.Volume - 1), 1, 15)) & Environment.NewLine

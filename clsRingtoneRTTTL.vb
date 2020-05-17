@@ -1,6 +1,50 @@
 ' Standard RTTTL format to the internal ringtone format converter
 ' Copyright (c) Samuel Gomes, 2003-2020
 ' mailto: v_2samg@hotmail.com
+'
+' RTTTL Format Specifications
+'
+' RTTTL(RingTone Text Transfer Language) Is the primary format used To distribute 
+' ringtones for Nokia phones. An RTTTL file Is a text file, containing the 
+' ringtone name, a control section And a section containing a comma separated 
+' sequence of ring tone commands. White space must be ignored by any reader 
+' application. 
+'
+' Example:
+' Simpsons: d = 4,o=5,b=160:32p,c.6,e6,f#6,8a6,g.6,e6,c6,8a,8f#,8f#,8f#,2g
+'
+' This file describes a ringtone whose name Is 'Simpsons'. The control section 
+' sets the beats per minute at 160, the Default note length As 4, And the Default 
+' scale as Octave 5. 
+' <RTX file> := <name> ":" [<control section>] ":" <tone-commands>
+'
+' 	<name> := <Char> ; maximum name length 10 characters
+'
+' 	<Control-section> := <control-pair> ["," <control-section>]
+'
+' 		<Control-pair> := <control-name> ["="] <control-value>
+'
+' 		<Control-name> := "o" | "d" | "b"
+' 		; Valid in control section: o =default scale, d=default duration, b=default beats per minute. 
+' 		; if Not specified, defaults are 4=duration, 6=scale, 63=beats-per-minute
+' 		; any unknown control-names must be ignored
+'
+' 		<tone-commands> := <tone-command> ["," <tone-commands>]
+'
+' 		<tone-command> :=<note> | <control-pair>
+'
+' 		<note> := [<duration>] <note> [<scale>] [<special-duration>] <delimiter>
+'
+' 			<duration> := "1" | "2" | "4" | "8" | "16" | "32" 
+' 			; duration Is divider of full note duration, eg. 4 represents a quarter note
+'
+' 			<note> := "P" | "C" | "C#" | "D" | "D#" | "E" | "F" | "F#" | "G" | "G#" | "A" | "A#" | "B" 
+'
+' 			<scale> :="4" | "5" | "6" | "7"
+' 			; Note that octave 4: A = 440Hz, 5: A = 880Hz, 6: A = 1.76 kHz, 7: A = 3.52 kHz
+' 			; The lowest note on the Nokia 61xx Is A4, the highest Is B7
+'
+' 			<special-duration> := "." ; Dotted note
 
 Imports Microsoft.VisualBasic
 
@@ -66,8 +110,8 @@ Friend Class ClsRingtoneRTTTL
 			sNote = CChar(IIf(InStr(sTemp, "c") > 0, "c", IIf(InStr(sTemp, "d") > 0, "d", IIf(InStr(sTemp, "e") > 0, "e", IIf(InStr(sTemp, "f") > 0, "f", IIf(InStr(sTemp, "g") > 0, "g", IIf(InStr(sTemp, "a") > 0, "a", IIf(InStr(sTemp, "b") > 0, "b", IIf(InStr(sTemp, "p") > 0, "p", "p")))))))))
 			bIsSharp = InStr(sTemp, "#") > 0
 			cOctave = CByte(Val(ParseString(sTemp, "cdefgabp.#", 2)))
-			cOctave = CByte(IIf(cOctave < 1, cDefOctave, cOctave)) - CByte(4)
-			cOctave = CByte(Clamp(cOctave, 1, 3))
+			cOctave = CByte(IIf(cOctave < 4, cDefOctave, cOctave)) - CByte(4)
+			cOctave = CByte(Clamp(cOctave, ClsRingTonePlayer.NOTE_OCTAVE_MIN, ClsRingTonePlayer.NOTE_OCTAVE_MAX))
 			cDuration = CByte(Val(ParseString(sTemp, "cdefgabp.#", 1)))
 			cDuration = CByte(IIf(cDuration < 1, cDefDuration, cDuration))
 			cDuration = CByte(IIf(cDuration > 16, 1, IIf(cDuration > 8, 2, IIf(cDuration > 4, 3, IIf(cDuration > 2, 4, IIf(cDuration > 1, 5, IIf(cDuration >= 0, 6, 6)))))))

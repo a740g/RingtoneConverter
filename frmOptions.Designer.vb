@@ -1,5 +1,5 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmOptions
+Partial Class FrmOptions
 
 #Region "Upgrade Support "
 

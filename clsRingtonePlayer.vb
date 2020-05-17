@@ -1,13 +1,13 @@
 ' Ringtone playback class
 ' Copyright (c) Samuel Gomes, 2003-2020
 ' mailto: v_2samg@hotmail.com
-
+'
 ' This implements ringtone playback in the application.
 ' It is responsible for playing a single tone given the note, duration etc.
 ' It also handles silence.
 ' The details:
 ' Supports playback of the folowing notes: c, d, e, f, g, a, b and their #s
-' Supports octaves: 1, 2, 3 where 1 is the lowest and 3 is the highest
+' Supports octaves: 1, 2, 3 & 4 where 1 is the lowest and 4 is the highest
 ' Supports dot notes: '.' (affects duration of the note played back)
 ' Supports durations: 1, 2, 3, 4, 5, 6 (where 1 is the shortest and 6 is the longest or full)
 ' Supports silence: p (p = pause :)
@@ -17,12 +17,10 @@
 ' It's up to the individual 'Ringtone classes' to convert it's data to this format.
 ' As you can see, if we do this, then interconversion between various formats becomes very simple. :)
 ' Also, it supports a global tempo, which ranges from 1 to 255 (200 is the default)
-
-' If you want to implement the note output using MIDI, DirectSound or whatever, then this is the
-' module to change.
-
-' This class contains a bug: Sometimes some tone does not 'sound' right. Probably some miscalculation
-' is taking place or some data is not right. NEEDS TO BE FIXED!
+'
+' Playback was previously done using Win32 Beep() API
+' However this API does not work as expected on all systems and configurations
+' Hence, We now implement playback Using DirectSound via SharpDX
 
 Imports Microsoft.VisualBasic
 Imports System.Collections.Specialized
@@ -41,8 +39,8 @@ Friend Class ClsRingTonePlayer
 	Private Const NOTE_FRQ_A As Single = 440.0!
 	Private Const NOTE_FRQ_B As Single = 493.88!
 	' Note duration and octave constants
-	Private Const NOTE_OCTAVE_MIN As Integer = 1
-	Private Const NOTE_OCTAVE_MAX As Integer = 3
+	Public Const NOTE_OCTAVE_MIN As Integer = 1
+	Public Const NOTE_OCTAVE_MAX As Integer = 4
 	' The full note duration in ms. The rest as usual is calculated mathematically. ;)
 	Private Const NOTE_DURATION_FULL As Integer = 1200
 	Private Const NOTE_DURATION_MIN As Integer = 1

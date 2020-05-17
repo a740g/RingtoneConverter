@@ -172,7 +172,6 @@ Partial Class FrmMain
         '
         'cboRingtones
         '
-        Me.cboRingtones.AllowDrop = True
         Me.cboRingtones.BackColor = System.Drawing.SystemColors.Window
         Me.cboRingtones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboRingtones.FlatStyle = System.Windows.Forms.FlatStyle.System
@@ -181,7 +180,6 @@ Partial Class FrmMain
         Me.cboRingtones.Name = "cboRingtones"
         Me.cboRingtones.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.cboRingtones.Size = New System.Drawing.Size(481, 21)
-        Me.cboRingtones.Sorted = True
         Me.cboRingtones.TabIndex = 3
         Me.ToolTipMain.SetToolTip(Me.cboRingtones, "Select the ringtone you want.")
         '

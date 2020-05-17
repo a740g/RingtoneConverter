@@ -4,8 +4,10 @@
 
 Imports Microsoft.VisualBasic
 
-Partial Friend Class frmOptions
+Partial Friend Class FrmOptions
 	Inherits Form
+
+	Private ReadOnly isInitializingComponent As Boolean
 
 	Public Sub New()
 		MyBase.New()
@@ -59,35 +61,30 @@ Partial Friend Class frmOptions
 		txtVolume.Text = CStr(sldVolume.Value)
 	End Sub
 
-	Private ReadOnly isInitializingComponent As Boolean
 	Private Sub TxtAutoBacklight_TextChanged(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles txtAutoBacklight.TextChanged
-		If isInitializingComponent Then
-			Exit Sub
-		End If
+		If isInitializingComponent Then Exit Sub
+
 		txtAutoBacklight.Text = CStr(Conversion.Val(txtAutoBacklight.Text))
 		sldAutoBacklight.Value = CInt(txtAutoBacklight.Text)
 	End Sub
 
 	Private Sub TxtAutoLED_TextChanged(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles txtAutoLED.TextChanged
-		If isInitializingComponent Then
-			Exit Sub
-		End If
+		If isInitializingComponent Then Exit Sub
+
 		txtAutoLED.Text = CStr(Conversion.Val(txtAutoLED.Text))
 		sldAutoLED.Value = CInt(txtAutoLED.Text)
 	End Sub
 
 	Private Sub TxtAutoVibration_TextChanged(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles txtAutoVibration.TextChanged
-		If isInitializingComponent Then
-			Exit Sub
-		End If
+		If isInitializingComponent Then Exit Sub
+
 		txtAutoVibration.Text = CStr(Conversion.Val(txtAutoVibration.Text))
 		sldAutoVibration.Value = CInt(txtAutoVibration.Text)
 	End Sub
 
 	Private Sub TxtRepeat_TextChanged(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles txtRepeat.TextChanged
-		If isInitializingComponent Then
-			Exit Sub
-		End If
+		If isInitializingComponent Then Exit Sub
+
 		txtRepeat.Text = CStr(Conversion.Val(txtRepeat.Text))
 		sldRepeat.Value = CInt(txtRepeat.Text)
 	End Sub
@@ -98,19 +95,18 @@ Partial Friend Class frmOptions
 	End Sub
 
 	Private Sub TxtVolume_TextChanged(ByVal eventSender As Object, ByVal eventArgs As EventArgs) Handles txtVolume.TextChanged
-		If isInitializingComponent Then
-			Exit Sub
-		End If
+		If isInitializingComponent Then Exit Sub
+
 		txtVolume.Text = CStr(Conversion.Val(txtVolume.Text))
 		sldVolume.Value = CInt(txtVolume.Text)
 	End Sub
 
 	Private Sub FrmOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-		cboStyle.SelectedIndex = 1
-		TxtAutoBacklight_TextChanged(txtAutoBacklight, New EventArgs())
-		TxtAutoLED_TextChanged(txtAutoLED, New EventArgs())
-		TxtAutoVibration_TextChanged(txtAutoVibration, New EventArgs())
-		TxtRepeat_TextChanged(txtRepeat, New EventArgs())
-		TxtVolume_TextChanged(txtVolume, New EventArgs())
+		cboStyle.SelectedIndex = 0
+		TxtAutoBacklight_TextChanged(sender, e)
+		TxtAutoLED_TextChanged(sender, e)
+		TxtAutoVibration_TextChanged(sender, e)
+		TxtRepeat_TextChanged(sender, e)
+		TxtVolume_TextChanged(sender, e)
 	End Sub
 End Class
