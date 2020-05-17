@@ -3,5 +3,8 @@ A standard RTTTL ringtone to Sony Ericsson IMY ringtone converter program
 that I wrote ages ago for my Sony Ericsson T610 cell phone. I wrote the program in Visual Basic 6.
 Since it was lying on my hard drive for a long time and I have no plan to work on it, I am putting it in public domain.
 Do with it as you please. Please note that I will not be responsible for anything.
-I attempted to convert this to Visual Basic .Net. After 5 hours of tinkering, it is still a mess. It compiles, but needs a lot of work.
-Someday...
+2020: I have updated this to work with Visual Basic .Net. It tooks me 48 hours to work out
+all the conversion bugs. In the process, I have managed to fix some bugs that were present in the VB6 version. Sweet.
+This should not compile and run without issues using Visual Studio 2019 Community Edition.
+I will be halting any commints unless someone finds any serious issues.
+If anyone wants to extend this, fork this or whatever, you are free to do so. Just drop me a note.
