@@ -256,11 +256,7 @@ Friend Class ClsRingTonePlayer
 			Return cTempo
 		End Get
 		Set(ByVal Value As Integer)
-			If Value < NOTE_TEMPO_MIN Then
-				Throw New Exception((vbObjectError + 1011).ToString() + ", , Tempo out of range")
-			End If
-
-			cTempo = Value
+			cTempo = Math.Max(Value, NOTE_TEMPO_MIN)
 		End Set
 	End Property
 

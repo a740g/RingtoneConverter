@@ -40,7 +40,7 @@ Partial Friend Class FrmMain
 	Private Declare Function ShellAbout Lib "shell32" Alias "ShellAboutA" (ByVal hWnd As IntPtr, ByVal szApp As String, ByVal szOtherStuff As String, ByVal hIcon As IntPtr) As Integer
 
 	' The RTTTL ringtone collection file
-	Private Const FileRTC As String = "\ringtones.rtc"
+	Private Const FileRTC As String = "ringtones.rtc"
 	' Flag that can be checked when the app is loading the ringtone collection
 	Private IsLoading As Boolean = False
 	' In-memory ringtone collection
@@ -157,7 +157,7 @@ Partial Friend Class FrmMain
 				errWriteRTC = True
 
 				iFileRTC = FileSystem.FreeFile()
-				FileSystem.FileOpen(iFileRTC, My.Application.Info.DirectoryPath & FileRTC, OpenMode.Output, OpenAccess.Write)
+				FileSystem.FileOpen(iFileRTC, FileRTC, OpenMode.Output, OpenAccess.Write)
 
 				For lCtr As Integer = 0 To cboRingtones.Items.Count - 1
 					If LCase(Trim(sRT)) <> LCase(Trim(scRingtones(lCtr))) Then
@@ -174,7 +174,7 @@ Partial Friend Class FrmMain
 			End If
 
 			If errWriteRTC Then
-				MessageBox.Show("Failed to save ringtones to the ringtone collection file (" & My.Application.Info.DirectoryPath & FileRTC & ")!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+				MessageBox.Show("Failed to save ringtones to the ringtone collection file (" & FileRTC & ")!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 			End If
 		End Try
 	End Sub
@@ -294,7 +294,7 @@ Partial Friend Class FrmMain
 			scRingtones.Clear()
 
 			iFileRTC = FileSystem.FreeFile()
-			FileSystem.FileOpen(iFileRTC, My.Application.Info.DirectoryPath & FileRTC, OpenMode.Input, OpenAccess.Read)
+			FileSystem.FileOpen(iFileRTC, FileRTC, OpenMode.Input, OpenAccess.Read)
 
 			Do Until FileSystem.EOF(iFileRTC)
 				sRingtone = FileSystem.LineInput(iFileRTC)
@@ -309,7 +309,7 @@ Partial Friend Class FrmMain
 
 		Catch
 
-			MessageBox.Show("Failed to load ringtones from the ringtone collection file (" & My.Application.Info.DirectoryPath & FileRTC & ")!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+			MessageBox.Show("Failed to load ringtones from the ringtone collection file (" & FileRTC & ")!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 
 		End Try
 

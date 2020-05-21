@@ -8,20 +8,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RingtoneConverter.vbproj", 
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Mixed Platforms = Debug|Mixed Platforms
-		Debug|x86 = Debug|x86
-		Release|Mixed Platforms = Release|Mixed Platforms
-		Release|x86 = Release|x86
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Debug|x86.ActiveCfg = Debug|x86
-		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Debug|x86.Build.0 = Debug|x86
-		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Release|Mixed Platforms.Build.0 = Release|x86
-		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Release|x86.ActiveCfg = Release|x86
-		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Release|x86.Build.0 = Release|x86
+		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB2A229D-A6F3-4870-9F05-DF84A6248D89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

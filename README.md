@@ -1,5 +1,5 @@
 # RingtoneConverter
-![Screenshot](screenshot.jpg)  
+![Screenshot](screenshot.gif)  
 A standard RTTTL ringtone to Sony Ericsson IMY ringtone converter program
 that I wrote ages ago for my Sony Ericsson T610 cell phone. I wrote the program in Visual Basic 6.
 Since it was lying on my hard drive for a long time and I have no plan to work on it, I am putting it in public domain.
