@@ -174,7 +174,6 @@ Partial Class FrmMain
         '
         Me.cboRingtones.BackColor = System.Drawing.SystemColors.Window
         Me.cboRingtones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboRingtones.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.cboRingtones.ForeColor = System.Drawing.SystemColors.WindowText
         Me.cboRingtones.Location = New System.Drawing.Point(8, 16)
         Me.cboRingtones.Name = "cboRingtones"
@@ -188,7 +187,6 @@ Partial Class FrmMain
         Me.MainMenu1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuPlay, Me.mnuHelp})
         Me.MainMenu1.Location = New System.Drawing.Point(0, 0)
         Me.MainMenu1.Name = "MainMenu1"
-        Me.MainMenu1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.MainMenu1.Size = New System.Drawing.Size(512, 24)
         Me.MainMenu1.TabIndex = 6
         '
@@ -203,77 +201,77 @@ Partial Class FrmMain
         '
         Me.mnuFileNew.Name = "mnuFileNew"
         Me.mnuFileNew.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.mnuFileNew.Size = New System.Drawing.Size(180, 22)
+        Me.mnuFileNew.Size = New System.Drawing.Size(168, 22)
         Me.mnuFileNew.Text = "&New"
         '
         'mnuFileSave
         '
         Me.mnuFileSave.Name = "mnuFileSave"
         Me.mnuFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mnuFileSave.Size = New System.Drawing.Size(180, 22)
+        Me.mnuFileSave.Size = New System.Drawing.Size(168, 22)
         Me.mnuFileSave.Text = "&Save"
         '
         'mnuFileRemove
         '
         Me.mnuFileRemove.Name = "mnuFileRemove"
         Me.mnuFileRemove.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
-        Me.mnuFileRemove.Size = New System.Drawing.Size(180, 22)
+        Me.mnuFileRemove.Size = New System.Drawing.Size(168, 22)
         Me.mnuFileRemove.Text = "&Remove..."
         '
         'mnuFileBar1
         '
         Me.mnuFileBar1.AllowDrop = True
         Me.mnuFileBar1.Name = "mnuFileBar1"
-        Me.mnuFileBar1.Size = New System.Drawing.Size(177, 6)
+        Me.mnuFileBar1.Size = New System.Drawing.Size(165, 6)
         '
         'mnuFileProperties
         '
         Me.mnuFileProperties.Name = "mnuFileProperties"
-        Me.mnuFileProperties.Size = New System.Drawing.Size(180, 22)
+        Me.mnuFileProperties.Size = New System.Drawing.Size(168, 22)
         Me.mnuFileProperties.Text = "Propert&ies..."
         '
         'mnuFileBar2
         '
         Me.mnuFileBar2.AllowDrop = True
         Me.mnuFileBar2.Name = "mnuFileBar2"
-        Me.mnuFileBar2.Size = New System.Drawing.Size(177, 6)
+        Me.mnuFileBar2.Size = New System.Drawing.Size(165, 6)
         '
         'mnuFileConvert
         '
         Me.mnuFileConvert.Name = "mnuFileConvert"
         Me.mnuFileConvert.ShortcutKeys = System.Windows.Forms.Keys.F9
-        Me.mnuFileConvert.Size = New System.Drawing.Size(180, 22)
+        Me.mnuFileConvert.Size = New System.Drawing.Size(168, 22)
         Me.mnuFileConvert.Text = "&Convert"
         '
         'mnuFileExport
         '
         Me.mnuFileExport.Name = "mnuFileExport"
         Me.mnuFileExport.ShortcutKeys = System.Windows.Forms.Keys.F6
-        Me.mnuFileExport.Size = New System.Drawing.Size(180, 22)
+        Me.mnuFileExport.Size = New System.Drawing.Size(168, 22)
         Me.mnuFileExport.Text = "&Export..."
         '
         'mnuFileBar3
         '
         Me.mnuFileBar3.AllowDrop = True
         Me.mnuFileBar3.Name = "mnuFileBar3"
-        Me.mnuFileBar3.Size = New System.Drawing.Size(177, 6)
+        Me.mnuFileBar3.Size = New System.Drawing.Size(165, 6)
         '
         'mnuFileOptions
         '
         Me.mnuFileOptions.Name = "mnuFileOptions"
-        Me.mnuFileOptions.Size = New System.Drawing.Size(180, 22)
+        Me.mnuFileOptions.Size = New System.Drawing.Size(168, 22)
         Me.mnuFileOptions.Text = "&Options..."
         '
         'mnuFileBar4
         '
         Me.mnuFileBar4.AllowDrop = True
         Me.mnuFileBar4.Name = "mnuFileBar4"
-        Me.mnuFileBar4.Size = New System.Drawing.Size(177, 6)
+        Me.mnuFileBar4.Size = New System.Drawing.Size(165, 6)
         '
         'mnuFileExit
         '
         Me.mnuFileExit.Name = "mnuFileExit"
-        Me.mnuFileExit.Size = New System.Drawing.Size(180, 22)
+        Me.mnuFileExit.Size = New System.Drawing.Size(168, 22)
         Me.mnuFileExit.Text = "E&xit"
         '
         'mnuPlay
@@ -287,14 +285,14 @@ Partial Class FrmMain
         '
         Me.mnuPlayPlay.Name = "mnuPlayPlay"
         Me.mnuPlayPlay.ShortcutKeys = System.Windows.Forms.Keys.F5
-        Me.mnuPlayPlay.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPlayPlay.Size = New System.Drawing.Size(117, 22)
         Me.mnuPlayPlay.Text = "&Play"
         '
         'mnuPlayStop
         '
         Me.mnuPlayStop.Name = "mnuPlayStop"
         Me.mnuPlayStop.ShortcutKeys = System.Windows.Forms.Keys.F4
-        Me.mnuPlayStop.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPlayStop.Size = New System.Drawing.Size(117, 22)
         Me.mnuPlayStop.Text = "&Stop"
         '
         'mnuHelp
@@ -316,7 +314,6 @@ Partial Class FrmMain
         Me.fraSE.AllowDrop = True
         Me.fraSE.BackColor = System.Drawing.SystemColors.Control
         Me.fraSE.Controls.Add(Me.txtDestination)
-        Me.fraSE.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.fraSE.ForeColor = System.Drawing.SystemColors.ControlText
         Me.fraSE.Location = New System.Drawing.Point(8, 224)
         Me.fraSE.Name = "fraSE"
@@ -332,7 +329,6 @@ Partial Class FrmMain
         Me.fraRTTL.BackColor = System.Drawing.SystemColors.Control
         Me.fraRTTL.Controls.Add(Me.txtSource)
         Me.fraRTTL.Controls.Add(Me.cboRingtones)
-        Me.fraRTTL.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.fraRTTL.ForeColor = System.Drawing.SystemColors.ControlText
         Me.fraRTTL.Location = New System.Drawing.Point(8, 56)
         Me.fraRTTL.Name = "fraRTTL"
@@ -365,7 +361,6 @@ Partial Class FrmMain
         Me.tbToolbar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbToolbar_New, Me.tbToolbar_Save, Me.tbToolbar_Delete, Me.tbToolbar_Buttons_Button4, Me.tbToolbar_Properties, Me.tbToolbar_Buttons_Button6, Me.tbToolbar_Convert, Me.tbToolbar_Export, Me.tbToolbar_Buttons_Button9, Me.tbToolbar_Options, Me.tbToolbar_Buttons_Button11, Me.tbToolbar_Play, Me.tbToolbar_Stop, Me.tbToolbar_Buttons_Button14, Me.tbToolbar_Help})
         Me.tbToolbar.Location = New System.Drawing.Point(0, 24)
         Me.tbToolbar.Name = "tbToolbar"
-        Me.tbToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.tbToolbar.Size = New System.Drawing.Size(512, 25)
         Me.tbToolbar.TabIndex = 0
         '
