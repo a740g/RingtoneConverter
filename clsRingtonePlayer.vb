@@ -69,6 +69,8 @@ Friend Class ClsRingTonePlayer
 	Private Const SAMPLING_RATE As Integer = 44100
 	Private Const SCALE As Integer = (1 << (BITS_PER_SAMPLE - 1)) - 1
 
+    Private Declare Sub Beep Lib "kernel32" (ByVal dwFreq As Integer, ByVal dwDuration As Integer) ' TODO: Give this as an option
+
 	' Target frequency precision: less than 0.5% Error
 	'   37  Hz @ 44.1kHz sampling -> half-period of ~596 samples
 	' 32.8 kHz @ 44.1kHz sampling -> half-period of ~0.67 samples
